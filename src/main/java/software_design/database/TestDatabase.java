@@ -9,10 +9,10 @@ public class TestDatabase {
             // Test creating the database if it does not exist
             Database.createDatabase();
             System.out.println("Database creation checked.");
-
-            // Initialize Hibernate (this will handle table creation)
-            Database.initializeHibernate();
-            System.out.println("Hibernate initialized and schema updated.");
+            
+            // Create tables using raw SQL statements
+            Database.createTables();
+            System.out.println("Tables created successfully.");
 
             // Test getting a connection to the database
             Connection connection = Database.getConnection();

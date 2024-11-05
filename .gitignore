@@ -3,5 +3,10 @@
 
 #ignore .idea files
 .idea
+
+#ignore .vscode files
+/.vscode/
+
 # Project exclude paths
 /target/
+
