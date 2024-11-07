@@ -13,12 +13,13 @@ public class Database {
     private static final String DB_NAME = dotenv.get("DB_NAME");
     private static final String DB_USER = dotenv.get("DB_USER");
     private static final String DB_PASS = dotenv.get("DB_PASSWORD");
-    private static final String DB_URL = "jdbc:mysql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME;
+    private static final String DB_URL_NO_DB = "jdbc:mysql://" + DB_HOST + ":" + DB_PORT;
+    private static final String DB_URL = DB_URL_NO_DB + "/" + DB_NAME;
 
     public static void createDatabase() throws SQLException 
     {
         // Create the database if it does not exist
-        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+        try (Connection conn = DriverManager.getConnection(DB_URL_NO_DB, DB_USER, DB_PASS);
              Statement stmt = conn.createStatement()) {
             stmt.executeUpdate("CREATE DATABASE IF NOT EXISTS " + DB_NAME);
         } 
