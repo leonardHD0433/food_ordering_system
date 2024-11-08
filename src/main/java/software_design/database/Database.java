@@ -42,12 +42,18 @@ public class Database {
                 "ItemName VARCHAR(50) NOT NULL, " +
                 "ItemDescription VARCHAR(150) NOT NULL, " +
                 "ItemPrice DOUBLE NOT NULL, " +
-                "ItemAvailability VARCHAR(5) NOT NULL" +
+                "ItemAvailability BOOLEAN NOT NULL" +
+                "ItemImage MEDIUMBLOB NOT NULL" +
+                ")";
+
+        String createTableStatusSQL = "CREATE TABLE IF NOT EXISTS table_status (" +
+                "TableId INT PRIMARY KEY, " +
                 ")";
 
         try (Connection conn = getConnection();
              Statement stmt = conn.createStatement()) {
             stmt.executeUpdate(createMenuTableSQL);
+            stmt.executeUpdate(createTableStatusSQL);
             System.out.println("Tables created successfully.");
         } catch (SQLException e) {
             System.out.println("Error creating tables: " + e.getMessage());

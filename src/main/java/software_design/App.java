@@ -29,9 +29,12 @@ public class App extends Application
 
     public static void setRoot(String fxml)
     {
-        try {
+        try 
+        {
             scene.setRoot(loadFXML(fxml));
-        } catch (IOException e) {
+        } 
+        catch (IOException e) 
+        {
             LOGGER.log(Level.SEVERE, "Failed to load FXML file: " + fxml, e);
         }
     }
