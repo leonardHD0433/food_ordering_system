@@ -41,13 +41,14 @@ public class Database {
                 "ItemCategory VARCHAR(20) NOT NULL, " +
                 "ItemName VARCHAR(50) NOT NULL, " +
                 "ItemDescription VARCHAR(150) NOT NULL, " +
+                "ItemOptions VARCHAR(100), " +
                 "ItemPrice DOUBLE NOT NULL, " +
-                "ItemAvailability BOOLEAN NOT NULL" +
+                "ItemAvailability BOOLEAN NOT NULL," +
                 "ItemImage MEDIUMBLOB NOT NULL" +
                 ")";
 
         String createTableStatusSQL = "CREATE TABLE IF NOT EXISTS table_status (" +
-                "TableId INT PRIMARY KEY, " +
+                "TableId INT PRIMARY KEY" +
                 ")";
 
         try (Connection conn = getConnection();
