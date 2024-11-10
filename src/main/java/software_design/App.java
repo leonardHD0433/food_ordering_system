@@ -22,7 +22,7 @@ public class App extends Application
     @Override
     public void start(Stage stage) throws IOException 
     {
-        scene = new Scene(loadFXML("test_image"), 640, 480); //table_selection
+        scene = new Scene(loadFXML("table_selection"), 640, 480); //table_selection
         stage.setScene(scene);
         stage.show();
     }

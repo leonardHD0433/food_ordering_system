@@ -98,12 +98,16 @@ public class Database {
                 // Improved image loading with proper resource management
                 String imagePath = "src/main/java/software_design/database/data/item_img/" + data[6].trim();
                 File imageFile = new File(imagePath);
-                if (imageFile.exists()) {
-                    try (FileInputStream fis = new FileInputStream(imageFile)) {
+                if (imageFile.exists()) 
+                {
+                    try (FileInputStream fis = new FileInputStream(imageFile)) 
+                    {
                         pstmt.setBinaryStream(7, fis, imageFile.length());
                         pstmt.executeUpdate();
                     }
-                } else {
+                } 
+                else 
+                {
                     System.out.println("Image not found: " + imagePath);
                     pstmt.setBytes(7, new byte[0]);
                     pstmt.executeUpdate();

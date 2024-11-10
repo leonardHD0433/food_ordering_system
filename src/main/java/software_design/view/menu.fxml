@@ -1,18 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="software_design.controller.MenuController">
-    <center>
-        <VBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
-            <Label text="Welcome to the Food Ordering System" style="-fx-font-size: 24px; -fx-text-fill: white;" />
+    <top>
+        <VBox spacing="5.0">
+            <!-- Table number HBox -->
+            <HBox alignment="CENTER_LEFT">
+                <padding>
+                    <Insets top="10" left="20" bottom="10"/>
+                </padding>
+                <Label fx:id="tableNumberLabel" 
+                    style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: black;"/>
+            </HBox>
+            
+            <!-- Menu title -->
+            <VBox alignment="CENTER">
+                <padding>
+                    <Insets bottom="20"/>
+                </padding>
+                <Label text="MENU" 
+                    style="-fx-font-size: 24px; -fx-text-fill: black; -fx-font-weight: bold;" />
+            </VBox>
+
+            <!-- Filter section -->
+            <ScrollPane fx:id="filterScrollPane" fitToHeight="true" hbarPolicy="AS_NEEDED" vbarPolicy="NEVER" 
+                        style="-fx-background-color: transparent;">
+                <HBox fx:id="filterContainer" spacing="15" alignment="TOP_LEFT">
+                    <padding>
+                        <Insets top="5" right="20" bottom="5" left="20"/>
+                    </padding>
+                </HBox>
+            </ScrollPane>
         </VBox>
+    </top>
+    
+    <center>
+        <ScrollPane fx:id="menuScrollPane" fitToWidth="true" styleClass="menu-scroll-pane">
+            <GridPane fx:id="menuGrid" hgap="20" vgap="20">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+            </GridPane>
+        </ScrollPane>
     </center>
-    <style>
-        .root {
-            -fx-background-color: black;
-        }
-    </style>
 </BorderPane>

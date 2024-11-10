@@ -18,7 +18,7 @@
       
         <!-- Initial button -->
         <Button fx:id="selectTableButton" 
-                text="Select Table" 
+                text="Enter Table Number" 
                 onAction="#handleTableSelection" 
                 style="-fx-font-size: 24px; -fx-padding: 10 20 10 20; -fx-min-width: 150;">
 
@@ -40,7 +40,7 @@
         </TextField>
 
         <Button fx:id="submitButton" 
-                text="Submit" 
+                text="Proceed" 
                 onAction="#handleSubmit" 
                 visible="false"
                 style="-fx-font-size: 24px; -fx-padding: 10 20 10 20; -fx-min-width: 150;"

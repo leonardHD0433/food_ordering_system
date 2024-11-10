@@ -4,6 +4,7 @@ public class TableManager {
     private static TableManager instance;
     private final Table[] tables;
     private static final int MAX_TABLES = 20;
+    private Table currentTable;
 
     private TableManager() {
         tables = new Table[MAX_TABLES];
@@ -24,6 +25,11 @@ public class TableManager {
         if (tableNumber < 1 || tableNumber > MAX_TABLES) {
             throw new IllegalArgumentException("Invalid table number");
         }
-        return tables[tableNumber - 1];
+        currentTable = tables[tableNumber - 1];
+        return currentTable;
+    }
+
+    public Table getCurrentTable() {
+        return currentTable;
     }
 }
