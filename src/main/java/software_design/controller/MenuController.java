@@ -43,7 +43,7 @@ public class MenuController
             menuItems = menu.getMenuItems();
             categories = menu.getDistinctCategories();
 
-            menuView.setupMenuGrid(menuItems, this::handleMenuItemClick);
+            menuView.setupMenuGrid(menuItems);
             menuView.setTableNumberLabel(currentTable.getTableId());
             menuView.setupFilterButtons(categories, this::handleFilterClick);
             menuView.styleScrollPanes(filterScrollPane, menuScrollPane);
@@ -68,7 +68,7 @@ public class MenuController
                     .filter(item -> category.equals(item.getCategory()))
                     .collect(Collectors.toList());
             }
-            menuView.setupMenuGrid(filteredItems, this::handleMenuItemClick);
+            menuView.setupMenuGrid(filteredItems);
         } 
         catch (SQLException e) 
         {

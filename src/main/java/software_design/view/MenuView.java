@@ -33,7 +33,7 @@ public class MenuView
         tableNumberLabel.setText("Table: " + tableNumber);
     }
     
-    public void setupMenuGrid(List<MenuItem> menuItems, Consumer<MenuItem> onItemClick) 
+    public void setupMenuGrid(List<MenuItem> menuItems) 
     {
         // Clear existing items
         menuGrid.getChildren().clear();
@@ -50,12 +50,12 @@ public class MenuView
         for (int i = 0; i < menuItems.size(); i++) 
         {
             MenuItem item = menuItems.get(i);
-            VBox menuItem = createMenuItem(item, onItemClick);
+            VBox menuItem = createMenuItem(item);
             menuGrid.add(menuItem, i % 2, i / 2);
         }
     }
     
-    private VBox createMenuItem(MenuItem item, Consumer<MenuItem> onItemClick) 
+    private VBox createMenuItem(MenuItem item) 
     {
         VBox menuItem = new VBox(10);
         menuItem.getStyleClass().add("menu-item");
