@@ -1,9 +1,17 @@
 package software_design.database;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.io.File;
+
+
 import io.github.cdimascio.dotenv.Dotenv;
 
 public class Database {
@@ -52,12 +60,55 @@ public class Database {
                 ")";
 
         try (Connection conn = getConnection();
-             Statement stmt = conn.createStatement()) {
+            Statement stmt = conn.createStatement()) {
             stmt.executeUpdate(createMenuTableSQL);
             stmt.executeUpdate(createTableStatusSQL);
             System.out.println("Tables created successfully.");
         } catch (SQLException e) {
             System.out.println("Error creating tables: " + e.getMessage());
+        }
+    }
+
+    public static void importMenuData() throws SQLException, IOException {
+        String insertSQL = "INSERT INTO menu_table (ItemCategory, ItemName, ItemDescription, ItemOptions, ItemPrice, ItemAvailability, ItemImage) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        
+        String csvFile = "src/main/java/software_design/database/data/menu.csv";
+        String line;
+        boolean firstLine = true;
+    
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(insertSQL);
+             BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+    
+            while ((line = br.readLine()) != null) {
+                if (firstLine) {
+                    firstLine = false;
+                    continue;
+                }
+    
+                String[] data = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+                
+                pstmt.setString(1, data[0].trim());
+                pstmt.setString(2, data[1].trim());
+                pstmt.setString(3, data[2].trim().replace("\"", ""));
+                pstmt.setString(4, data[3].trim());
+                pstmt.setDouble(5, Double.parseDouble(data[4].trim()));
+                pstmt.setBoolean(6, "Available".equals(data[5].trim()));
+    
+                // Improved image loading with proper resource management
+                String imagePath = "src/main/java/software_design/database/data/item_img/" + data[6].trim();
+                File imageFile = new File(imagePath);
+                if (imageFile.exists()) {
+                    try (FileInputStream fis = new FileInputStream(imageFile)) {
+                        pstmt.setBinaryStream(7, fis, imageFile.length());
+                        pstmt.executeUpdate();
+                    }
+                } else {
+                    System.out.println("Image not found: " + imagePath);
+                    pstmt.setBytes(7, new byte[0]);
+                    pstmt.executeUpdate();
+                }
+            }
         }
     }
 }

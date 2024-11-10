@@ -5,6 +5,7 @@ module software_design {
     requires java.sql;
     requires io.github.cdimascio.dotenv.java;
     requires jakarta.persistence;
+    requires javafx.swing;
 
     exports software_design.controller;
     opens software_design.controller to javafx.fxml;

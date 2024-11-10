@@ -1,26 +1,26 @@
 ItemCategory,ItemName,ItemDescription,ItemOption,ItemPrice,ItemAvailability,ItemImage
-Pasta,Spaghetti Bolognese,"Spaghetti served with meat sauce","Meat,Chicken,Beef",15.00,Available,./pasta/spaghetti_bolognese.jpg
-Pasta,Spaghetti Carbonara,"Spaghetti served with cream sauce","Meat,Chicken,Beef",18.00,Available,./pasta/spaghetti_carbonara.jpg
-Pasta,Spaghetti Aglio Olio,"Spaghetti served with garlic, olive oil, and parsley","Prefer,Spicy,Less Spicy",12.00,Available,./pasta/spaghetti_aglio_olio.jpg
-Pasta,Spaghetti Napolitana,"Spaghetti served with italian tomato sauce",,13.00,Available,./pasta/spaghetti_napolitana.jpg
-Pasta,Spaghetti Marinara,"Spaghetti served with seafood tomato sauce",,20.00,Available,./pasta/spaghetti_marinara.jpg
-Pasta,Spaghetti Pesto,"Spaghetti served with meat slices, basil, garlic, and olive oil","Meat,Chicken,Beef",17.00,Available,./pasta/spaghetti_pesto.jpg
-Chicken, Black Pepper Chicken Chop,"Chicken chop served with black pepper sauce, fries and daily vegetables",,15.00,Available,./chicken/black_pepper_chicken_chop.jpg
-Chicken, Grilled Chicken Chop,"Grilled chicken chop served with mushroom sauce, fries and daily vegetables",,16.00,Available,./chicken/grilled_chicken_chop.jpg
-Chicken, Fried Chicken Chop, "Fried chicken chop served with fries and daily vegetables",,15.00,Available,./chicken/fried_chicken_chop.jpg
-Chicken, Mushroom Chicken Chop,"Chicken chop served with mushroom sauce, fries and daily vegetables",,15.00,Available,./chicken/mushroom_chicken_chop.jpg
-Chicken, Chicken Cordon Bleu,"Chicken chop served with ham and cheese, fries and daily vegetables",,20.00,Available,./chicken/chicken_cordon_bleu.jpg
-Beef, Black Pepper Beef Steak,"Beef steak served with black pepper sauce, fries and daily vegetables",,29.00,Available,./beef/black_pepper_beef_steak.jpg
-Beef, Grilled Beef Steak,"Grilled beef steak served with mushroom sauce, fries and daily vegetables",,30.00,Available,./beef/grilled_beef_steak.jpg
-Beef, Charbroiled Black Pepper T.Bone Steak, "T.Bone steak served with mashed potatoes and daily vegetables",,37.00,Available,./beef/charbroiled_black_pepper_t_bone_steak.jpg
-Beef, Charbroiled Sirlion Steak,"Sirlion steak served with sauce, backed potatoes and daily vegetables","Sauce,Mushroom,Black Pepper",37.00,Available,./beef/charbroiled_sirlion_steak.jpg
-Beef, Wienerschnitzel,"Breaded veal escalope served with our home made baked potatoes and daily vegetable",,40.00,Available,./beef/wienerschnitzel.jpg
-Sides, French Fries,"Fried potato sticks",,7.00,Available,./sides/french_fries.jpg
-Sides, Mashed Potatoes,"Mashed potatoes served with gravy",,8.00,Available,./sides/mashed_potatoes.jpg
-Sides, Chicken Caesar Salad,"Caesar salad served with grilled chicken",,12.00,Available,./sides/chicken_caesar_salad.jpg
-Sides, Mushroom Soup,"Creamy mushroom soup with bread",,7.00,Available,mushroom_soup.jpg
-Beverages, Coke,"Carbonated soft drink",,3.00,Available,coke.jpg
-Beverages, Sprite,"Carbonated soft drink",,3.00,Available,sprite.jpg
-Beverages, Milo,"Chocolate drink with condensed milk","Prefer,Hot,Cold",3.50,Available,milo.jpg
-Beverages, Teh Tarik,"Tea with condensed milk","Prefer,Hot,Cold",3.50,Available,teh_tarik.jpg
-Beverages, Expresso (Hot),"Strong coffee",,4.00,Available,expresso.jpg
+Pasta,Spaghetti Bolognese,"Spaghetti served with meat sauce","Meat,Chicken,Beef",15.00,Available,pasta/spaghetti_bolognese.jpg
+Pasta,Spaghetti Carbonara,"Spaghetti served with cream sauce","Meat,Chicken,Beef",18.00,Available,pasta/spaghetti_carbonara.jpg
+Pasta,Spaghetti Aglio Olio,"Spaghetti served with garlic, olive oil, and parsley","Prefer,Spicy,Less Spicy",12.00,Available,pasta/spaghetti_aglio_olio.jpg
+Pasta,Spaghetti Napolitana,"Spaghetti served with italian tomato sauce",,13.00,Available,pasta/spaghetti_napolitana.jpg
+Pasta,Spaghetti Marinara,"Spaghetti served with seafood tomato sauce",,20.00,Available,pasta/spaghetti_marinara.jpg
+Pasta,Spaghetti Pesto,"Spaghetti served with meat slices, basil, garlic, and olive oil","Meat,Chicken,Beef",17.00,Available,pasta/spaghetti_pesto.jpg
+Chicken, Black Pepper Chicken Chop,"Chicken chop served with black pepper sauce, fries and daily vegetables",,15.00,Available,chicken/black_pepper_chicken_chop.jpg
+Chicken, Grilled Chicken Chop,"Grilled chicken chop served with mushroom sauce, fries and daily vegetables",,16.00,Available,chicken/grilled_chicken_chop.jpg
+Chicken, Fried Chicken Chop, "Fried chicken chop served with fries and daily vegetables",,15.00,Available,chicken/fried_chicken_chop.jpg
+Chicken, Mushroom Chicken Chop,"Chicken chop served with mushroom sauce, fries and daily vegetables",,15.00,Available,chicken/mushroom_chicken_chop.jpg
+Chicken, Chicken Cordon Bleu,"Chicken chop served with ham and cheese, fries and daily vegetables",,20.00,Available,chicken/chicken_cordon_bleu.jpg
+Beef, Black Pepper Beef Steak,"Beef steak served with black pepper sauce, fries and daily vegetables",,29.00,Available,beef/black_pepper_beef_steak.jpg
+Beef, Grilled Beef Steak,"Grilled beef steak served with mushroom sauce, fries and daily vegetables",,30.00,Available,beef/grilled_beef_steak.jpg
+Beef, Charbroiled Black Pepper T.Bone Steak, "T.Bone steak served with mashed potatoes and daily vegetables",,37.00,Available,beef/charbroiled_black_pepper_t_bone_steak.jpg
+Beef, Charbroiled Sirlion Steak,"Sirlion steak served with sauce, backed potatoes and daily vegetables","Sauce,Mushroom,Black Pepper",37.00,Available,beef/charbroiled_sirlion_steak.jpg
+Beef, Wienerschnitzel,"Breaded veal escalope served with our home made baked potatoes and daily vegetable",,40.00,Available,beef/wienerschnitzel.jpg
+Sides, French Fries,"Fried potato sticks",,7.00,Available,sides/french_fries.jpg
+Sides, Mashed Potatoes,"Mashed potatoes served with gravy",,8.00,Available,sides/mashed_potatoes.jpg
+Sides, Chicken Caesar Salad,"Caesar salad served with grilled chicken",,12.00,Available,sides/chicken_caesar_salad.jpg
+Sides, Mushroom Soup,"Creamy mushroom soup with bread",,7.00,Available,sides/mushroom_soup.jpg
+Beverages, Coke,"Carbonated soft drink",,3.00,Available,beverages/coke.jpg
+Beverages, Sprite,"Carbonated soft drink",,3.00,Available,beverages/sprite.jpg
+Beverages, Milo,"Chocolate drink with condensed milk","Prefer,Hot,Cold",3.50,Available,beverages/milo.jpg
+Beverages, Teh Tarik,"Tea with condensed milk","Prefer,Hot,Cold",3.50,Available,beverages/teh_tarik.jpg
+Beverages, Expresso (Hot),"Strong coffee",,4.00,Available,beverages/expresso.jpg
