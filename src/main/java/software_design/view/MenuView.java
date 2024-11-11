@@ -33,57 +33,38 @@ public class MenuView
         tableNumberLabel.setText("Table: " + tableNumber);
     }
     
-    public void setupMenuGrid(List<MenuItem> menuItems) 
-    {
-        // Clear existing items
+    public void setupMenuGrid(List<MenuItem> menuItems) {
         menuGrid.getChildren().clear();
-
-        // Set column constraints to make columns equal width
         menuGrid.getColumnConstraints().clear();
-        for (int i = 0; i < 2; i++) 
-        {
+        
+        // Set column constraints
+        for (int i = 0; i < 2; i++) {
             javafx.scene.layout.ColumnConstraints column = new javafx.scene.layout.ColumnConstraints();
             column.setPercentWidth(50);
             menuGrid.getColumnConstraints().add(column);
         }
         
-        for (int i = 0; i < menuItems.size(); i++) 
-        {
+        // Create menu items
+        for (int i = 0; i < menuItems.size(); i++) {
             MenuItem item = menuItems.get(i);
-            VBox menuItem = createMenuItem(item);
+            VBox menuItem = createMenuItem(item, this.onItemClick);
             menuGrid.add(menuItem, i % 2, i / 2);
         }
     }
     
-    private VBox createMenuItem(MenuItem item) 
-    {
+    private VBox createMenuItem(MenuItem item, Consumer<MenuItem> onItemClick) {
         VBox menuItem = new VBox(10);
-        menuItem.getStyleClass().add("menu-item");
-        menuItem.setStyle("-fx-background-color: #808080;" + 
-                          "-fx-padding: 15; " +
-                          "-fx-background-radius: 5;");
-        menuItem.setMinHeight(150);
-
-        // Add hover effect
-        menuItem.setOnMouseEntered(e -> 
-        menuItem.setStyle(menuItem.getStyle().replace("#808080", "#666666"))
-        );
-        menuItem.setOnMouseExited(e -> 
-            menuItem.setStyle(menuItem.getStyle().replace("#666666", "#808080"))
-        );
-
-        // Add click handler
-        menuItem.setOnMouseClicked(e -> onItemClick.accept(item));
-
-        // Wrap ImageView in HBox for centering
+        styleMenuItem(menuItem);
+        
         HBox imageContainer = new HBox();
         imageContainer.setAlignment(javafx.geometry.Pos.CENTER);
         ImageView imageView = createImageView(item);
         imageContainer.getChildren().add(imageView);
-
+        
         Label itemLabel = createLabel(item.getName() + "\t " + String.format("RM%.2f", item.getPrice()), "19px");
-
+        
         menuItem.getChildren().addAll(imageContainer, itemLabel);
+        menuItem.setOnMouseClicked(e -> onItemClick.accept(item));
         return menuItem;
     }
 
@@ -214,5 +195,18 @@ public class MenuView
             
         filterScrollPane.setStyle(scrollPaneStyle);
         menuScrollPane.setStyle(scrollPaneStyle);
+    }
+
+    private void styleMenuItem(VBox menuItem) {
+        menuItem.getStyleClass().add("menu-item");
+        menuItem.setStyle("-fx-background-color: #808080; -fx-padding: 15; -fx-background-radius: 5;");
+        menuItem.setMinHeight(150);
+        
+        menuItem.setOnMouseEntered(e -> 
+            menuItem.setStyle(menuItem.getStyle().replace("#808080", "#666666"))
+        );
+        menuItem.setOnMouseExited(e -> 
+            menuItem.setStyle(menuItem.getStyle().replace("#666666", "#808080"))
+        );
     }
 }

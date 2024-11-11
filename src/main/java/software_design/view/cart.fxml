@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="software_design.controller.CartController">
+    <top>
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <padding>
+                <Insets top="10" right="20" bottom="10" left="20"/>
+            </padding>
+            <Button fx:id="backButton" onAction="#handleBackClick" text="Back"/>
+            <Label text="Cart" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+        </HBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true">
+            <VBox fx:id="cartItemsContainer" spacing="10">
+                <padding>
+                    <Insets top="10" right="20" bottom="10" left="20"/>
+                </padding>
+            </VBox>
+        </ScrollPane>
+    </center>
+
+    <bottom>
+        <VBox fx:id="bottomControls" spacing="10">
+            <padding>
+                <Insets top="10" right="20" bottom="20" left="20"/>
+            </padding>
+            <HBox alignment="CENTER_RIGHT">
+                <Label text="Total: RM" style="-fx-font-size: 18px;"/>
+                <Label fx:id="totalLabel" text="0.00" style="-fx-font-size: 18px;"/>
+            </HBox>
+            <Button fx:id="checkoutButton" text="Checkout" 
+                    onAction="#handleCheckout"
+                    style="-fx-background-color: #4CAF50; -fx-text-fill: white;"
+                    maxWidth="Infinity"/>
+        </VBox>
+    </bottom>
+</BorderPane>

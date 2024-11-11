@@ -4,6 +4,9 @@
 #ignore .idea files
 .idea
 
+#ignore .drawio files
+*.drawio
+
 #ignore .vscode files
 /.vscode/
 
