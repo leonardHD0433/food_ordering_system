@@ -1,13 +1,16 @@
 package software_design.controller;
 
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.layout.VBox;
+import javafx.stage.StageStyle;
 import software_design.App;
 import software_design.model.*;
 import software_design.model.MenuItem;
 import software_design.view.ItemDetailsView;
+import javafx.util.Duration;
 
 public class ItemDetailsController {
     @FXML private Label tableNumberLabel;
@@ -66,9 +69,30 @@ public class ItemDetailsController {
         String remarks = view.getRemarks();
         
         // Add item to cart
+        Table currentTable = TableManager.getInstance().getCurrentTable();
+        Cart cart = currentTable.getCart();
+        cart.addItem(currentItem, quantity, selectedOption, remarks);
         
         // Reset and return to menu
         view.reset();
+        showTemporaryAlert("Item added to cart successfully!");
         App.setRoot("menu");
+    }
+
+    private void showTemporaryAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(null);
+        alert.setHeaderText(message);
+        alert.setContentText(null);
+
+        // Remove window decorations
+        alert.initStyle(StageStyle.UNDECORATED);
+        
+        // Auto close after 2 seconds
+        PauseTransition delay = new PauseTransition(Duration.seconds(2));
+        delay.setOnFinished(e -> alert.close());
+        delay.play();
+        
+        alert.show();
     }
 }

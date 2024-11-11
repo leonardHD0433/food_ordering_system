@@ -3,6 +3,7 @@ package software_design.view;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import javafx.geometry.Pos;
+import software_design.model.MenuItem;
 
 public class CartView {
     
@@ -26,5 +27,39 @@ public class CartView {
     public static void showBottomControls(VBox bottomControls) {
         bottomControls.setVisible(true);
         bottomControls.setManaged(true);
+    }
+
+    public static VBox createCartItemView(MenuItem item, int quantity, String option, String remarks) {
+        VBox itemBox = new VBox(5);
+        itemBox.setStyle(
+            "-fx-background-color: white;" +
+            "-fx-border-color: #cccccc;" +
+            "-fx-border-radius: 5;" +
+            "-fx-padding: 10;"
+        );
+        
+        // Item name and price
+        Label nameLabel = new Label(item.getName());
+        nameLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 16px;");
+        
+        Label priceLabel = new Label(String.format("RM%.2f", item.getPrice() * quantity));
+        
+        // Quantity and option
+        Label quantityLabel = new Label("Quantity: " + quantity);
+        Label optionLabel = new Label("Option: " + (option != null ? option : "None"));
+        
+        // Remarks if any
+        Label remarksLabel = new Label("Remarks: " + (remarks != null && !remarks.isEmpty() ? remarks : "None"));
+        remarksLabel.setWrapText(true);
+        
+        itemBox.getChildren().addAll(
+            nameLabel,
+            priceLabel,
+            quantityLabel,
+            optionLabel,
+            remarksLabel
+        );
+        
+        return itemBox;
     }
 }

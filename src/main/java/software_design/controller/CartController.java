@@ -1,5 +1,7 @@
 package software_design.controller;
 
+import java.util.List;
+
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
@@ -7,6 +9,7 @@ import javafx.scene.control.Button;
 import software_design.App;
 import software_design.model.Cart;
 import software_design.view.CartView;
+import software_design.model.MenuItem;
 
 public class CartController 
 {
@@ -25,16 +28,28 @@ public class CartController
         updateCartView();
     }
 
-    private void updateCartView() 
-    {
-        if (cart.isEmpty()) 
-        {
+    private void updateCartView() {
+        if (cart.isEmpty()) {
             CartView.showEmptyCart(cartItemsContainer);
             CartView.hideBottomControls(bottomControls);
-        } 
-        else 
-        {
-            // Show cart items
+        } else {
+            cartItemsContainer.getChildren().clear();
+            List<MenuItem> items = cart.getItems();
+            List<Integer> quantities = cart.getQuantities();
+            List<String> options = cart.getOptions();
+            List<String> remarks = cart.getRemarks();
+            
+            for (int i = 0; i < items.size(); i++) {
+                VBox itemBox = CartView.createCartItemView(
+                    items.get(i),
+                    quantities.get(i),
+                    options.get(i),
+                    remarks.get(i)
+                );
+                cartItemsContainer.getChildren().add(itemBox);
+            }
+            
+            totalLabel.setText(String.format("%.2f", cart.getTotal()));
             CartView.showBottomControls(bottomControls);
         }
     }
