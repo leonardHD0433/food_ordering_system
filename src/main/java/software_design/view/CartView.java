@@ -46,19 +46,20 @@ public class CartView {
         
         // Quantity and option
         Label quantityLabel = new Label("Quantity: " + quantity);
-        Label optionLabel = new Label("Option: " + (option != null ? option : "None"));
+
+        itemBox.getChildren().addAll(nameLabel, priceLabel, quantityLabel);
+
+        if (!option.equals("null")) 
+        {
+            Label optionLabel = new Label("Option: " + option);
+            itemBox.getChildren().add(optionLabel);
+        }
         
         // Remarks if any
         Label remarksLabel = new Label("Remarks: " + (remarks != null && !remarks.isEmpty() ? remarks : "None"));
         remarksLabel.setWrapText(true);
         
-        itemBox.getChildren().addAll(
-            nameLabel,
-            priceLabel,
-            quantityLabel,
-            optionLabel,
-            remarksLabel
-        );
+        itemBox.getChildren().add(remarksLabel);
         
         return itemBox;
     }

@@ -1,8 +1,10 @@
 package software_design.view;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 import software_design.model.MenuItem;
 import java.io.ByteArrayInputStream;
 
@@ -75,6 +77,9 @@ public class ItemDetailsView {
                 Label optionHeader = new Label(parts[0]);
                 optionHeader.setStyle("-fx-font-weight: bold; -fx-font-size: 16px;");
                 
+                HBox headerBox = new HBox(optionHeader);
+                headerBox.setAlignment(Pos.CENTER_LEFT);
+
                 optionsGroup = new ToggleGroup();
                 VBox radioBox = new VBox(5);
                 
@@ -85,14 +90,22 @@ public class ItemDetailsView {
                     radioBox.getChildren().add(rb);
                 }
                 
-                optionsBox.getChildren().addAll(optionHeader, radioBox);
+                optionsBox.getChildren().addAll(headerBox, radioBox);
             }
         }
     }
 
     public String getSelectedOption() {
+        if (optionsGroup == null) {
+            return "null";
+        }
+        
         RadioButton selected = (RadioButton) optionsGroup.getSelectedToggle();
-        return selected != null ? selected.getText() : null;
+        if (selected == null) {
+            return "must select";
+        }
+        
+        return selected.getText();
     }
 
     public int getQuantity() {

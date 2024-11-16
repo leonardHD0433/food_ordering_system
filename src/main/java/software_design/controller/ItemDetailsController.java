@@ -1,11 +1,13 @@
 package software_design.controller;
 
 import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.StageStyle;
+import javafx.stage.Window;
 import software_design.App;
 import software_design.model.*;
 import software_design.model.MenuItem;
@@ -65,8 +67,17 @@ public class ItemDetailsController {
         
         // Get user inputs from view
         String selectedOption = view.getSelectedOption();
+        if(selectedOption == "must select") {
+            showTemporaryAlert("Please select an option!", "#F44336");
+            return;
+        }
+
         int quantity = view.getQuantity();
         String remarks = view.getRemarks();
+        if (!isValidRemarks(remarks)) {
+            showTemporaryAlert("Remarks can only contain letters, numbers and basic punctuation (.,!?)", "#F44336");
+            return;
+        }
         
         // Add item to cart
         Table currentTable = TableManager.getInstance().getCurrentTable();
@@ -75,24 +86,46 @@ public class ItemDetailsController {
         
         // Reset and return to menu
         view.reset();
-        showTemporaryAlert("Item added to cart successfully!");
+        showTemporaryAlert("Item added to cart successfully!", "#4CAF50");
         App.setRoot("menu");
     }
 
-    private void showTemporaryAlert(String message) {
+    private boolean isValidRemarks(String remarks) {
+        if (remarks == null || remarks.isEmpty()) {
+            return true; // Empty remarks are valid
+        }
+        // Allow letters, numbers, spaces and basic punctuation
+        return remarks.matches("^[a-zA-Z0-9\\s.,!?]+$");
+    }
+
+    private void showTemporaryAlert(String message, String color) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(null);
         alert.setHeaderText(message);
         alert.setContentText(null);
+        alert.getDialogPane().setStyle("-fx-background-color: " + color + ";");
 
         // Remove window decorations
         alert.initStyle(StageStyle.UNDECORATED);
+ 
+        Window mainWindow = App.getScene().getWindow();
+    
+        // Make alert follow the main window
+        alert.initOwner(mainWindow);
         
+        // Show first for dimensions calculation
+        alert.show();
+        
+        // Center the alert on the main window
+        double centerX = mainWindow.getX() + (mainWindow.getWidth() - alert.getWidth()) / 2;
+        double centerY = mainWindow.getY() + (mainWindow.getHeight() - alert.getHeight()) / 2;
+        
+        alert.setX(centerX);
+        alert.setY(centerY);
+
         // Auto close after 2 seconds
         PauseTransition delay = new PauseTransition(Duration.seconds(2));
         delay.setOnFinished(e -> alert.close());
         delay.play();
-        
-        alert.show();
     }
 }

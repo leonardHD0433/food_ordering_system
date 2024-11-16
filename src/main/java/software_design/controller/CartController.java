@@ -10,6 +10,8 @@ import software_design.App;
 import software_design.model.Cart;
 import software_design.view.CartView;
 import software_design.model.MenuItem;
+import software_design.model.TableManager;
+import software_design.model.Table;
 
 public class CartController 
 {
@@ -19,12 +21,17 @@ public class CartController
     @FXML private Button checkoutButton;
     @FXML private VBox bottomControls;
     
+    private TableManager tableManager;
+    private Table currentTable;
     private Cart cart;
+    private VBox itemBox;
 
     @FXML
     private void initialize() 
     {
-        cart = new Cart();
+        tableManager = TableManager.getInstance();
+        currentTable = tableManager.getCurrentTable();
+        this.cart = currentTable.getCart();
         updateCartView();
     }
 
@@ -40,7 +47,7 @@ public class CartController
             List<String> remarks = cart.getRemarks();
             
             for (int i = 0; i < items.size(); i++) {
-                VBox itemBox = CartView.createCartItemView(
+                itemBox = CartView.createCartItemView(
                     items.get(i),
                     quantities.get(i),
                     options.get(i),

@@ -13,40 +13,45 @@ import java.util.logging.Logger;
 /**
  * JavaFX App
  */
-public class App extends Application 
-{
-
+public class App extends Application {
     private static Scene scene;
+    private static Stage primaryStage;
     private static final Logger LOGGER = Logger.getLogger(App.class.getName());
 
     @Override
-    public void start(Stage stage) throws IOException 
-    {
-        scene = new Scene(loadFXML("table_selection"), 640, 480); //table_selection
+    public void start(Stage stage) throws IOException {
+        primaryStage = stage; // Store reference to primary stage
+        scene = new Scene(loadFXML("table_selection"), 640, 480);
         stage.setScene(scene);
         stage.show();
     }
 
-    public static void setRoot(String fxml)
-    {
-        try 
-        {
+    public static double getWindowX() {
+        return primaryStage.getX(); // Get current X position
+    }
+
+    public static double getWindowY() {
+        return primaryStage.getY(); // Get current Y position
+    }
+
+    public static void setRoot(String fxml) {
+        try {
             scene.setRoot(loadFXML(fxml));
-        } 
-        catch (IOException e) 
-        {
+        } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Failed to load FXML file: " + fxml, e);
         }
     }
 
-    private static Parent loadFXML(String fxml) throws IOException 
-    {
+    private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/" + fxml + ".fxml"));
         return fxmlLoader.load();
     }
 
-    public static void main(String[] args) 
-    {
+    public static Scene getScene() {
+        return scene;
+    }
+
+    public static void main(String[] args) {
         launch();
     }
 }
