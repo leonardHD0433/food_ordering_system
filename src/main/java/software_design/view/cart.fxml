@@ -41,7 +41,7 @@
                 <Label text="Total: RM" style="-fx-font-size: 18px;"/>
                 <Label fx:id="totalLabel" text="0.00" style="-fx-font-size: 18px;"/>
             </HBox>
-            <Button fx:id="checkoutButton" text="Checkout" 
+            <Button fx:id="checkoutButton" text="Submit" 
                     onAction="#handleCheckout"
                     style="-fx-background-color: #4CAF50; -fx-text-fill: white;"
                     maxWidth="Infinity"/>
