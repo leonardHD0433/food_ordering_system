@@ -28,8 +28,9 @@ public class ItemDetailsView {
         this.itemImage = itemImage;
         this.itemNameLabel = itemNameLabel;
         this.itemDescLabel = itemDescLabel;
-        this.quantitySpinner = quantitySpinner;
         this.quantityFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 20, 1);
+        this.quantitySpinner = quantitySpinner;
+        this.quantitySpinner.setValueFactory(quantityFactory);
         this.optionsBox = optionsBox;
         this.remarksArea = remarksArea;
         this.scrollPane = scrollPane;
