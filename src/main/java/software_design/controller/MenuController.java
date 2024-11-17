@@ -53,6 +53,12 @@ public class MenuController {
     }
 
     @FXML
+    private void handleLogout() {
+        // Return to table selection page
+        App.setRoot("table_selection");
+    }
+
+    @FXML
     private void handleCartClick() {
         App.setRoot("cart");
     }
