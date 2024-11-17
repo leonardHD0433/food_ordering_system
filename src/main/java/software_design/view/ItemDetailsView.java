@@ -14,6 +14,7 @@ public class ItemDetailsView {
     private final Label itemNameLabel;
     private final Label itemDescLabel;
     private final Spinner<Integer> quantitySpinner;
+    private final SpinnerValueFactory<Integer> quantityFactory;
     private final VBox optionsBox;
     private final TextArea remarksArea;
     private ToggleGroup optionsGroup;
@@ -28,6 +29,7 @@ public class ItemDetailsView {
         this.itemNameLabel = itemNameLabel;
         this.itemDescLabel = itemDescLabel;
         this.quantitySpinner = quantitySpinner;
+        this.quantityFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 20, 1);
         this.optionsBox = optionsBox;
         this.remarksArea = remarksArea;
         this.scrollPane = scrollPane;

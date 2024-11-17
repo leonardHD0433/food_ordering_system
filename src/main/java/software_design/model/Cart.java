@@ -29,6 +29,20 @@ public class Cart {
     }
 
     public void addItem(MenuItem item, int quantity, String option, String remark) {
+        // Check if item with same option already exists
+        for (int i = 0; i < items.size(); i++) 
+        {
+            if (items.get(i).getId() == item.getId() && 
+                itemOption.get(i).equals(option) && remarks.get(i).equals(remark)) 
+            {
+                // Update existing item quantity
+                itemQuantity.set(i, itemQuantity.get(i) + quantity);
+                updateTotal();
+                return;
+            }
+        }
+        
+        // If not found, add as new item
         items.add(item);
         itemQuantity.add(quantity);
         itemOption.add(option);
