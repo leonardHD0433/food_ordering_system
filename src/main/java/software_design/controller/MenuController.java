@@ -24,6 +24,7 @@ public class MenuController {
     @FXML private ScrollPane filterScrollPane;
     @FXML private ScrollPane menuScrollPane;
     @FXML private Button cartButton;
+    @FXML private Button orderButton;
     
     private MenuView menuView;
     private Menu menu;
@@ -47,6 +48,11 @@ public class MenuController {
             menuView.setTableNumberLabel(currentTable.getTableId());
             menuView.setupFilterButtons(categories, this::handleFilterClick);
             menuView.styleScrollPanes(filterScrollPane, menuScrollPane);
+
+            // Hide/show order button based on order existence
+            // orderButton.setVisible(currentTable.getOrder() != null);
+            // orderButton.setManaged(currentTable.getOrder() != null);
+            menuView.styleOrderButton(orderButton);
         } catch (SQLException e) {
             System.err.println("Error loading menu items: " + e.getMessage());
         }
@@ -61,6 +67,11 @@ public class MenuController {
     @FXML
     private void handleCartClick() {
         App.setRoot("cart");
+    }
+
+    @FXML
+    private void handleOrderClick() {
+        App.setRoot("order");
     }
 
     private void handleFilterClick(String category) {

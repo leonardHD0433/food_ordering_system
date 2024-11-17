@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="software_design.controller.OrderController">
+    <top>
+        <HBox spacing="10" alignment="CENTER">
+            <padding>
+                <Insets top="10" right="20" bottom="10" left="20"/>
+            </padding>
+            <Button fx:id="backButton" text="Back" onAction="#handleBackClick"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="Order Summary" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="orderTimeLabel" style="-fx-font-size: 16px;"/>
+        </HBox>
+    </top>
+    <center>
+        <ScrollPane fitToWidth="true">
+            <VBox fx:id="orderItemsContainer" spacing="10">
+                <padding>
+                    <Insets top="10" right="20" bottom="10" left="20"/>
+                </padding>
+            </VBox>
+        </ScrollPane>
+    </center>
+    <bottom>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="10" right="20" bottom="20" left="20"/>
+            </padding>
+            <HBox alignment="CENTER_RIGHT">
+                <Label text="Total: RM" style="-fx-font-size: 18px;"/>
+                <Label fx:id="totalLabel" style="-fx-font-size: 18px;"/>
+            </HBox>
+        </VBox>
+    </bottom>
+</BorderPane>

@@ -95,4 +95,41 @@ public class CartView {
         
         return itemBox;
     }
+
+    public static void styleBackButton(Button backButton) {
+        backButton.setStyle(
+            "-fx-background-color: #E0E0E0;" +
+            "-fx-border-color: #808080;" +
+            "-fx-border-width: 1px;" +
+            "-fx-border-radius: 5px;" +
+            "-fx-background-radius: 5px;" +
+            "-fx-font-size: 14px;" +
+            "-fx-font-weight: bold;"
+        );
+    
+        backButton.setOnMouseEntered(e -> 
+            backButton.setStyle(
+                "-fx-background-color: #D0D0D0;" +
+                "-fx-border-color: #808080;" +
+                "-fx-border-width: 1px;" +
+                "-fx-border-radius: 5px;" +
+                "-fx-background-radius: 5px;" +
+                "-fx-font-size: 14px;" +
+                "-fx-font-weight: bold;" +
+                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0, 0, 1);"
+            )
+        );
+    
+        backButton.setOnMouseExited(e -> 
+            backButton.setStyle(
+                "-fx-background-color: #E0E0E0;" +
+                "-fx-border-color: #808080;" +
+                "-fx-border-width: 1px;" +
+                "-fx-border-radius: 5px;" +
+                "-fx-background-radius: 5px;" +
+                "-fx-font-size: 14px;" +
+                "-fx-font-weight: bold;"
+            )
+        );
+    }
 }

@@ -209,4 +209,21 @@ public class MenuView
             menuItem.setStyle(menuItem.getStyle().replace("#666666", "#808080"))
         );
     }
+
+    public void styleOrderButton(Button orderButton) {
+        orderButton.setStyle(
+            "-fx-background-color: #808080;\n" +
+            "-fx-text-fill: white;\n" +
+            "-fx-font-size: 20px;\n" +
+            "-fx-font-weight: bold;"
+        );
+
+        orderButton.setOnMouseEntered(e -> 
+            orderButton.setStyle(orderButton.getStyle() + "-fx-background-color: #666666;")
+        );
+        
+        orderButton.setOnMouseExited(e -> 
+            orderButton.setStyle(orderButton.getStyle() + "-fx-background-color: #808080;")
+        );
+    }
 }

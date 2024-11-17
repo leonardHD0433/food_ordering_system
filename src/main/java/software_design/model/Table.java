@@ -4,11 +4,13 @@ public class Table
 {
     private int tableId;
     private Cart cart;
+    private Order order;
 
     public Table(int tableId) 
     {
         setTableId(tableId);
         this.cart = new Cart();
+        this.order = null;
     }
 
     // Getters and setters
@@ -29,5 +31,18 @@ public class Table
 
     public void setCart(Cart cart) {
         this.cart = cart;
+    }
+
+    public void clearCart() {
+        this.cart = new Cart();
+    }
+
+    // Add order management methods
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }
