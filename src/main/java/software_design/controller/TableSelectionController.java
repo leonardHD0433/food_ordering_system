@@ -34,6 +34,11 @@ public class TableSelectionController {
     }
 
     @FXML
+    private void handleSwitchAdmin() {
+        App.setRoot("admin_homepage");
+    }
+
+    @FXML
     private void handleTableSelection() {
         view.showTableInputControls();
     }

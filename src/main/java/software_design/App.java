@@ -20,9 +20,11 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        //Customer View
         primaryStage = stage; // Store reference to primary stage
         scene = new Scene(loadFXML("table_selection"), 640, 480);
         stage.setScene(scene);
+        stage.setTitle("Restaurant Ordering System");
         stage.show();
     }
 

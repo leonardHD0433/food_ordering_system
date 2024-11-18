@@ -37,6 +37,24 @@ public class Menu {
         return menuItems;
     }
 
+    public void createItem(MenuItem item) throws SQLException 
+    {
+        String query = "INSERT INTO menu_table (ItemCategory, ItemName, ItemDescription, ItemOptions, ItemPrice, ItemAvailability, ItemImage) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = Database.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            
+            stmt.setString(1, item.getCategory());
+            stmt.setString(2, item.getName());
+            stmt.setString(3, item.getDescription());
+            stmt.setString(4, item.getOptions());
+            stmt.setDouble(5, item.getPrice());
+            stmt.setBoolean(6, item.isAvailable());
+            stmt.setBytes(7, item.getImage());
+            stmt.executeUpdate();
+        }
+    }
+
     public List<String> getDistinctCategories() throws SQLException 
     {
         distinct_categories = new ArrayList<>();
