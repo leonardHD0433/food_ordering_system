@@ -61,11 +61,7 @@
                 </padding>
                 <Region HBox.hgrow="ALWAYS"/>
                 <Label text="MENU" 
-                    style="-fx-font-size: 24px; -fx-text-fill: black; -fx-font-weight: bold;">
-                    <HBox.margin>
-                        <Insets left="150"/>
-                    </HBox.margin>
-                </Label>
+                    style="-fx-font-size: 24px; -fx-text-fill: black; -fx-font-weight: bold;"/>
                 <Region HBox.hgrow="ALWAYS"/>
                 <Button fx:id="orderButton" onAction="#handleOrderClick" text="My Order"
                     style="-fx-background-color: #E0E0E0;
@@ -76,7 +72,7 @@
                         -fx-font-size: 14px;
                         -fx-font-weight: bold;">
                     <HBox.margin>
-                        <Insets right="20"/>
+                        <Insets left="20" right="20"/>
                     </HBox.margin>
                 </Button>
             </HBox>
