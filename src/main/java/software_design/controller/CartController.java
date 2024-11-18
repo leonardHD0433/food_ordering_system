@@ -144,6 +144,7 @@ public class CartController
                     existingOrder.addItems(cart);
                 }
                 currentTable.clearCart();
+
                 showTemporaryAlert("Order placed successfully!", "#4CAF50");
                 App.setRoot("menu");
             } catch (Exception e) {

@@ -50,8 +50,8 @@ public class MenuController {
             menuView.styleScrollPanes(filterScrollPane, menuScrollPane);
 
             // Hide/show order button based on order existence
-            // orderButton.setVisible(currentTable.getOrder() != null);
-            // orderButton.setManaged(currentTable.getOrder() != null);
+            orderButton.setVisible(currentTable.getOrder() != null);
+            orderButton.setManaged(currentTable.getOrder() != null);
             menuView.styleOrderButton(orderButton);
         } catch (SQLException e) {
             System.err.println("Error loading menu items: " + e.getMessage());

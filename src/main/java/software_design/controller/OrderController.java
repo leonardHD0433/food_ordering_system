@@ -12,7 +12,6 @@ import software_design.view.OrderView;
 import javafx.scene.control.Button;
 
 public class OrderController {
-    @FXML private Label tableLabel;
     @FXML private Label orderTimeLabel;
     @FXML private Label totalLabel;
     @FXML private VBox orderItemsContainer;
@@ -28,10 +27,13 @@ public class OrderController {
         CartView.styleBackButton(backButton);
         
         if (currentOrder != null) {
-            tableLabel.setText("Table " + currentOrder.getTableId());
-            orderTimeLabel.setText("Order Time: " + currentOrder.getOrderTime());
+            orderTimeLabel.setText("Last Updated: " + currentOrder.getOrderTime());
             totalLabel.setText(String.format("%.2f", currentOrder.getTotal()));
-            updateOrderView();
+            
+            // Only update view if there are items
+            if (!currentOrder.getItems().isEmpty()) {
+                updateOrderView();
+            }
         }
     }
     

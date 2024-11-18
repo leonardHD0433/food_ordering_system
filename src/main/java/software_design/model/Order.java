@@ -8,6 +8,8 @@ import java.util.List;
 public class Order {
     private static final DateTimeFormatter ORDER_TIME_FORMAT = 
         DateTimeFormatter.ofPattern("yyyyMMddHHmm");
+    private static final DateTimeFormatter DISPLAY_TIME_FORMAT = 
+        DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private String orderId;
     private int tableId;
     private List<MenuItem> items;
@@ -26,6 +28,11 @@ public class Order {
         this.options = new ArrayList<>(cart.getOptions());
         this.remarks = new ArrayList<>(cart.getRemarks());
         this.itemStatus = new ArrayList<>();
+
+        for (int i = 0; i < cart.getItems().size(); i++) {
+            this.itemStatus.add("Pending");
+        }
+
         this.total = cart.getTotal();
         this.orderTime = LocalDateTime.now().format(ORDER_TIME_FORMAT);
         
@@ -85,6 +92,9 @@ public class Order {
     }
 
     public String getOrderTime() {
-        return orderTime;
+        // Parse stored time string back to LocalDateTime
+        LocalDateTime dateTime = LocalDateTime.parse(orderTime, ORDER_TIME_FORMAT);
+        // Return formatted display string
+        return dateTime.format(DISPLAY_TIME_FORMAT);
     }
 }

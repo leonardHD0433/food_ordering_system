@@ -25,22 +25,20 @@ public class OrderView {
         
         Label priceLabel = new Label(String.format("Price: RM%.2f", item.getPrice()));
         
-        // Quantity and status with subtotal
+        // Quantity and subtotal
         HBox detailsBox = new HBox(10);
         detailsBox.setAlignment(Pos.CENTER_LEFT);
         
         Label quantityLabel = new Label("Quantity: " + quantity);
-        Label statusLabel = new Label("Status: " + status);
         Label subtotalLabel = new Label(String.format("RM%.2f", item.getPrice() * quantity));
         
-        statusLabel.setStyle("-fx-font-weight: bold;");
         subtotalLabel.setStyle("-fx-font-weight: bold; -fx-min-width: 80px;");
         subtotalLabel.setAlignment(Pos.CENTER_RIGHT);
         
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
         
-        detailsBox.getChildren().addAll(quantityLabel, statusLabel, spacer, subtotalLabel);
+        detailsBox.getChildren().addAll(quantityLabel, spacer, subtotalLabel);
         
         itemBox.getChildren().addAll(nameLabel, priceLabel, detailsBox);
         
@@ -51,8 +49,12 @@ public class OrderView {
         
         Label remarksLabel = new Label("Remarks: " + (remarks != null && !remarks.isEmpty() ? remarks : "None"));
         remarksLabel.setWrapText(true);
-        
         itemBox.getChildren().add(remarksLabel);
+        
+        // Add status label after remarks
+        Label statusLabel = new Label("Status: " + status);
+        statusLabel.setStyle("-fx-font-weight: bold;");
+        itemBox.getChildren().add(statusLabel);
         
         return itemBox;
     }
