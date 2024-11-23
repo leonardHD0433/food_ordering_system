@@ -25,7 +25,7 @@ public class MenuModificationController {
     
     @FXML
     private void handleAddItem() {
-        App.setRoot("add_item");
+        App.setRoot("item_addition");
     }
     
     @FXML

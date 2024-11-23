@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+
+<ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="software_design.controller.ItemAdditionController">
+    <content>
+        <VBox alignment="CENTER" spacing="20.0">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            </padding>
+
+            <Label text="Add New Menu Item" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+            <GridPane vgap="10" hgap="10">
+                <Label text="Category:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="categoryComboBox" promptText="Select or enter category" 
+                         editable="true" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                <Label text="Name:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <TextField fx:id="nameField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                <Label text="Description:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <TextArea fx:id="descriptionArea" wrapText="true" prefRowCount="3" 
+                         GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                <Label text="Price (RM):" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <TextField fx:id="priceField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                <Label text="Options:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                <VBox spacing="5" GridPane.rowIndex="4" GridPane.columnIndex="1">
+                    <TextField fx:id="optionsField" promptText="Format: Option1,Option2,Option3"/>
+                    <Label text="Optional. Separate options with commas" style="-fx-font-size: 12px;"/>
+                </VBox>
+
+                <Label text="Image:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                <VBox spacing="10" GridPane.rowIndex="5" GridPane.columnIndex="1">
+                    <Button fx:id="imageButton" text="Choose Image" onAction="#handleImageSelection"/>
+                    <ImageView fx:id="imagePreview" fitHeight="200" fitWidth="200" preserveRatio="true"/>
+                    <Label fx:id="imageLabel" text="No image selected" style="-fx-font-size: 12px;"/>
+                </VBox>
+            </GridPane>
+
+            <HBox spacing="10" alignment="CENTER">
+                <Button fx:id="saveButton" text="Save Item" onAction="#handleSave"/>
+                <Button fx:id="cancelButton" text="Cancel" onAction="#handleCancel"/>
+            </HBox>
+        </VBox>
+    </content>
+</ScrollPane>
