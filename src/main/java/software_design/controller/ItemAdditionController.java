@@ -54,9 +54,16 @@ public class ItemAdditionController {
 
                 // Load and preview image
                 Image image = new Image(file.toURI().toString());
+
+                // Check if image width and height are the same
+                if (image.getWidth() != image.getHeight()) {
+                    showError("Image width and height must be the same");
+                    return;
+                }
+
                 imagePreview.setImage(image);
                 imageLabel.setText(file.getName());
-                
+  
                 // Store image data
                 selectedImageData = Files.readAllBytes(file.toPath());
             } catch (Exception e) {
@@ -80,7 +87,7 @@ public class ItemAdditionController {
                 descriptionArea.getText(),
                 optionsField.getText(),
                 Double.parseDouble(priceField.getText()),
-                true, // New items are available by default
+                true,
                 selectedImageData
             );
 

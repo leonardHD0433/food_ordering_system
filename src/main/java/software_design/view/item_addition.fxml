@@ -29,10 +29,9 @@
                 <Label text="Price (RM):" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
                 <TextField fx:id="priceField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
 
-                <Label text="Options:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                <Label text="Options (optional):" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
                 <VBox spacing="5" GridPane.rowIndex="4" GridPane.columnIndex="1">
-                    <TextField fx:id="optionsField" promptText="Format: Option1,Option2,Option3"/>
-                    <Label text="Optional. Separate options with commas" style="-fx-font-size: 12px;"/>
+                    <TextField fx:id="optionsField" promptText="Format: OptionHeader, Option1,Option2  Example: Sauce,Blck Pepper,Mushroom"/>
                 </VBox>
 
                 <Label text="Image:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>

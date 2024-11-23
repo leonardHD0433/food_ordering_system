@@ -30,6 +30,6 @@ public class MenuModificationController {
     
     @FXML
     private void handleEditItem() {
-        App.setRoot("edit_item");
+        App.setRoot("menu_admin");
     }
 }
