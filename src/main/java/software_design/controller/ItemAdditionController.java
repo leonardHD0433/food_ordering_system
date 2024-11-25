@@ -11,6 +11,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.sql.SQLException;
 import javafx.stage.FileChooser.ExtensionFilter;
+import java.util.List;
 
 public class ItemAdditionController {
     @FXML private ComboBox<String> categoryComboBox;
@@ -29,7 +30,9 @@ public class ItemAdditionController {
     private void initialize() {
         menu = new Menu();
         try {
-            categoryComboBox.getItems().addAll(menu.getDistinctCategories());
+            List<String>category = menu.getDistinctCategories();
+            category.remove("All");
+            categoryComboBox.getItems().addAll(category);
         } catch (SQLException e) {
             showError("Error loading categories: " + e.getMessage());
         }

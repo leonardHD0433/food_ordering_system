@@ -7,6 +7,8 @@ import software_design.model.MenuItem;
 import java.io.ByteArrayInputStream;
 import java.util.List;
 import java.util.function.Consumer;
+
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -16,21 +18,14 @@ import javafx.scene.image.ImageView;
 public class MenuViewAdmin
 {
     private final GridPane menuGrid;
-    private final Label tableNumberLabel;
     private final HBox filterContainer;
     private Consumer<MenuItem> onItemClick;
     
-    public MenuViewAdmin(GridPane menuGrid, Label tableNumberLabel, HBox filterContainer, Consumer<MenuItem> onItemClick) 
+    public MenuViewAdmin(GridPane menuGrid, HBox filterContainer, Consumer<MenuItem> onItemClick) 
     {
         this.menuGrid = menuGrid;
-        this.tableNumberLabel = tableNumberLabel;
         this.filterContainer = filterContainer;
         this.onItemClick = onItemClick;
-    }
-
-    public void setTableNumberLabel(int tableNumber) 
-    {
-        tableNumberLabel.setText("Table: " + tableNumber);
     }
     
     public void setupMenuGrid(List<MenuItem> menuItems) {
@@ -60,7 +55,7 @@ public class MenuViewAdmin
         imageContainer.setAlignment(javafx.geometry.Pos.CENTER);
         ImageView imageView = createImageView(item);
         imageContainer.getChildren().add(imageView);
-        
+
         Label itemLabel = createLabel(item.getName() + "\t " + String.format("RM%.2f", item.getPrice()), "19px");
         
         menuItem.getChildren().addAll(imageContainer, itemLabel);
@@ -210,20 +205,4 @@ public class MenuViewAdmin
         );
     }
 
-    public void styleOrderButton(Button orderButton) {
-        orderButton.setStyle(
-            "-fx-background-color: #808080;\n" +
-            "-fx-text-fill: white;\n" +
-            "-fx-font-size: 20px;\n" +
-            "-fx-font-weight: bold;"
-        );
-
-        orderButton.setOnMouseEntered(e -> 
-            orderButton.setStyle(orderButton.getStyle() + "-fx-background-color: #666666;")
-        );
-        
-        orderButton.setOnMouseExited(e -> 
-            orderButton.setStyle(orderButton.getStyle() + "-fx-background-color: #808080;")
-        );
-    }
 }

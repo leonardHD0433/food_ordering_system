@@ -67,7 +67,7 @@ public class ItemEditingController {
         selectedMenuItem = item;
             
         // Switch to item details view (now properly throws IOException)
-        App.setRoot("item_details");
+        App.setRoot("item_details_admin");
     }
     
     // Getter for selected menu item

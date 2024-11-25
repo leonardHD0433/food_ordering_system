@@ -115,4 +115,55 @@ public class Database {
             }
         }
     }
+
+    public static void updateMenuItem(String category, String name, String description, String options, double price, boolean isAvailable, byte[] image , int id) throws SQLException {
+        String updateSQL = "UPDATE menu_table SET " +
+                          "ItemCategory = ?, " +
+                          "ItemName = ?, " +
+                          "ItemDescription = ?, " +
+                          "ItemOptions = ?, " +
+                          "ItemPrice = ?, " +
+                          "ItemAvailability = ? " +
+                          "ItemImage = ? " +
+                          "WHERE ItemId = ?";
+    
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(updateSQL)) {
+            
+            // Set parameters
+            pstmt.setString(1, category);
+            pstmt.setString(2, name);
+            pstmt.setString(3, description);
+            pstmt.setString(4, options);
+            pstmt.setDouble(5, price);
+            pstmt.setBoolean(6, isAvailable);
+            pstmt.setBytes(7, image);
+            pstmt.setInt(8, id);
+            
+            // Execute update
+            int rowsAffected = pstmt.executeUpdate();
+            
+            if (rowsAffected == 0) {
+                throw new SQLException("Failed to update menu item, no rows affected.");
+            }
+        }
+    }
+
+    public static void removeMenuITem(int id) throws SQLException {
+        String deleteSQL = "DELETE FROM menu_table WHERE ItemId = ?";
+    
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(deleteSQL)) {
+            
+            // Set parameter
+            pstmt.setInt(1, id);
+            
+            // Execute delete
+            int rowsAffected = pstmt.executeUpdate();
+            
+            if (rowsAffected == 0) {
+                throw new SQLException("Failed to delete menu item, no rows affected.");
+            }
+        }
+    }
 }

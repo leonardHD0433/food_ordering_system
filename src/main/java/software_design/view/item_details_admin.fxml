@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="software_design.controller.ItemDetailsAdminController">
+    <top>
+        <HBox alignment="CENTER_RIGHT">
+            <padding>
+                <Insets top="10" right="20"/>
+            </padding>
+            <Button fx:id="closeButton" text="✕" onAction="#handleClose"
+                style="-fx-background-color: transparent;
+                       -fx-text-fill: #808080;
+                       -fx-font-size: 30px;
+                       -fx-padding: 5;"/>
+        </HBox>
+    </top>
+    
+    <center>
+        <ScrollPane fitToWidth="true" pannable="true" style="-fx-background-color: transparent;">
+            <VBox alignment="CENTER" spacing="15">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+                <!-- Item Image -->
+                <ImageView fx:id="itemImage" fitWidth="300" fitHeight="300" preserveRatio="true"/>
+                <!-- Item Name -->
+                <Label text="Item Name" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+                <TextField fx:id="itemNameField" editable="false" style="-fx-font-size: 24px; -fx-font-weight: bold;" prefHeight="100"/>
+                <!-- Item Description -->
+                <Label text="Description" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+                <TextArea fx:id="itemDescArea" editable="false" wrapText="true" style="-fx-font-size: 16px;" prefHeight="100"/>
+                <!-- Item Price -->
+                <Label text="Price (RM)" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+                <TextField fx:id="itemPriceField" editable="false" style="-fx-font-size: 16px;" prefHeight="100"/>
+                <!-- Item Options -->
+                <Label text="Options" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+                <TextArea fx:id="itemOptionsArea" editable="false" wrapText="true" style="-fx-font-size: 16px;" prefHeight="100"/>
+                <!-- Availability -->
+                <CheckBox fx:id="availabilityCheckBox" disable="true" text="Available"/>
+                <!-- Edit and Delete Buttons -->
+                <HBox spacing="10" alignment="CENTER">
+                    <Button fx:id="editButton" onAction="#handleEdit">
+                        <graphic>
+                            <ImageView fitWidth="30" fitHeight="30">
+                                <Image url="@../images/edit.png"/>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <Button fx:id="deleteButton" onAction="#handleDelete">
+                        <graphic>
+                            <ImageView fitWidth="30" fitHeight="30">
+                                <Image url="@../images/bin.png"/>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                </HBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>
