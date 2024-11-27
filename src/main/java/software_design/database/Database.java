@@ -123,7 +123,7 @@ public class Database {
                           "ItemDescription = ?, " +
                           "ItemOptions = ?, " +
                           "ItemPrice = ?, " +
-                          "ItemAvailability = ? " +
+                          "ItemAvailability = ?, " +
                           "ItemImage = ? " +
                           "WHERE ItemId = ?";
     

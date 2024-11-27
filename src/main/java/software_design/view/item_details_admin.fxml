@@ -26,6 +26,8 @@
                 </padding>
                 <!-- Item Image -->
                 <ImageView fx:id="itemImage" fitWidth="300" fitHeight="300" preserveRatio="true"/>
+                <Button fx:id="imageButton" text="Choose Image" onAction="#handleImageSelection" visible="false"/>
+                <Label fx:id="imageLabel" text="No image selected" style="-fx-font-size: 12px;"/>
                 <!-- Item Name -->
                 <Label text="Item Name" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
                 <TextField fx:id="itemNameField" editable="false" style="-fx-font-size: 24px; -fx-font-weight: bold;" prefHeight="100"/>
