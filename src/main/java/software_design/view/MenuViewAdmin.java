@@ -7,8 +7,6 @@ import software_design.model.MenuItem;
 import java.io.ByteArrayInputStream;
 import java.util.List;
 import java.util.function.Consumer;
-
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
