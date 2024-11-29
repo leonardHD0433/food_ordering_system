@@ -5,6 +5,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import javafx.stage.StageStyle;
+import javafx.stage.Window;
 import software_design.model.MenuItem;
 import software_design.App;
 import software_design.view.ItemDetailsAdminView;
@@ -188,6 +190,14 @@ public class ItemDetailsAdminController {
         alert.setTitle("Delete Item");
         alert.setHeaderText(null);
         alert.setContentText("Are you sure you want to delete this item?");
+        alert.initStyle(StageStyle.UNDECORATED);
+        alert.initOwner(App.getScene().getWindow());
+
+        // Position alert
+        Window mainWindow = App.getScene().getWindow();
+        alert.setX(mainWindow.getX() + (mainWindow.getWidth() - alert.getWidth()) / 2);
+        alert.setY(mainWindow.getY() + (mainWindow.getHeight() - alert.getHeight()) / 2);
+        
         alert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
                 try {
