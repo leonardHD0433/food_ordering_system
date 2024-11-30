@@ -1,4 +1,4 @@
-package software_design.view;
+package software_design.view.ItemDetailsPage;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.*;

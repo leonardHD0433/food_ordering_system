@@ -1,14 +1,16 @@
 package software_design.controller;
 
+import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import software_design.model.Order;
+import software_design.model.ConsolidatedOrder;
 import software_design.model.Table;
 import software_design.model.TableManager;
 import software_design.App;
-import software_design.view.CartView;
-import software_design.view.OrderView;
+import software_design.view.CartPage.CartView;
+import software_design.view.OrderPage.OrderView;
 import javafx.scene.control.Button;
 
 public class OrderController {
@@ -39,18 +41,19 @@ public class OrderController {
     
     @FXML
     private void handleBackClick() {
-        App.setRoot("menu");
+        App.setRoot("MenuPage/menu");
     }
     
     private void updateOrderView() {
         orderItemsContainer.getChildren().clear();
-        for (int i = 0; i < currentOrder.getItems().size(); i++) {
+        List<ConsolidatedOrder> consolidatedItems = currentOrder.getConsolidatedView();
+        for (ConsolidatedOrder consolidatedItem : consolidatedItems) {
             VBox itemView = OrderView.createOrderItemView(
-                currentOrder.getItems().get(i),
-                currentOrder.getQuantities().get(i),
-                currentOrder.getOptions().get(i),
-                currentOrder.getRemarks().get(i),
-                currentOrder.getItemStatus().get(i)
+                consolidatedItem.getItem(),
+                consolidatedItem.getQuantity(),
+                consolidatedItem.getOption(),
+                consolidatedItem.getRemark(),
+                consolidatedItem.getStatus()
             );
             orderItemsContainer.getChildren().add(itemView);
         }

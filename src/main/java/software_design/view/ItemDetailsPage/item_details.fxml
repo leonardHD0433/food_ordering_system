@@ -26,7 +26,7 @@
                            -fx-background-radius: 5px;">
                     <graphic>
                         <ImageView fitWidth="40" fitHeight="40">
-                            <Image url="@../images/shopping-cart.png"/>
+                            <Image url="@../../images/shopping-cart.png"/>
                         </ImageView>
                     </graphic>
                 </Button>

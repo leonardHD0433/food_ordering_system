@@ -3,7 +3,9 @@ package software_design.model;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Order {
     private static final DateTimeFormatter ORDER_TIME_FORMAT = 
@@ -21,16 +23,25 @@ public class Order {
     private String orderTime;
 
     public Order(String orderID, int tableId, Cart cart) {
-        this.orderId = orderID;
-        this.tableId = tableId;
-        this.items = new ArrayList<>(cart.getItems());
-        this.quantities = new ArrayList<>(cart.getQuantities());
-        this.options = new ArrayList<>(cart.getOptions());
-        this.remarks = new ArrayList<>(cart.getRemarks());
+        this.items = new ArrayList<>();
+        this.quantities = new ArrayList<>();
+        this.options = new ArrayList<>();
+        this.remarks = new ArrayList<>();
         this.itemStatus = new ArrayList<>();
-
+        
         for (int i = 0; i < cart.getItems().size(); i++) {
-            this.itemStatus.add("Pending");
+            MenuItem item = cart.getItems().get(i);
+            int quantity = cart.getQuantities().get(i);
+            String option = cart.getOptions().get(i);
+            String remark = cart.getRemarks().get(i);
+        
+            for (int q = 0; q < quantity; q++) {
+                this.items.add(item);
+                this.quantities.add(1); // Each item is treated individually
+                this.options.add(option);
+                this.remarks.add(remark);
+                this.itemStatus.add("Pending");
+            }
         }
 
         this.total = cart.getTotal();
@@ -40,13 +51,19 @@ public class Order {
 
     // Add items from cart to existing order
     public void addItems(Cart cart) {
-        this.items.addAll(cart.getItems());
-        this.quantities.addAll(cart.getQuantities());
-        this.options.addAll(cart.getOptions());
-        this.remarks.addAll(cart.getRemarks());
-        // Add "Pending" status for new items
         for (int i = 0; i < cart.getItems().size(); i++) {
-            this.itemStatus.add("Pending");
+            MenuItem item = cart.getItems().get(i);
+            int quantity = cart.getQuantities().get(i);
+            String option = cart.getOptions().get(i);
+            String remark = cart.getRemarks().get(i);
+        
+            for (int q = 0; q < quantity; q++) {
+                this.items.add(item);
+                this.quantities.add(1);
+                this.options.add(option);
+                this.remarks.add(remark);
+                this.itemStatus.add("Pending");
+            }
         }
         this.total += cart.getTotal();
     }
@@ -96,5 +113,34 @@ public class Order {
         LocalDateTime dateTime = LocalDateTime.parse(orderTime, ORDER_TIME_FORMAT);
         // Return formatted display string
         return dateTime.format(DISPLAY_TIME_FORMAT);
+    }
+
+    public void calculateTotal() {
+        total = 0.0;
+        for (int i = 0; i < items.size(); i++) {
+            total += items.get(i).getPrice() * quantities.get(i);
+        }
+    }
+
+    public List<ConsolidatedOrder> getConsolidatedView() {
+        Map<String, ConsolidatedOrder> consolidatedMap = new HashMap<>();
+
+        for (int i = 0; i < items.size(); i++) {
+            MenuItem item = items.get(i);
+            String option = options.get(i);
+            String remark = remarks.get(i);
+            String status = itemStatus.get(i);
+            String key = item.getId() + "-" + option + "-" + remark + "-" + status;
+
+            if (consolidatedMap.containsKey(key)) {
+                ConsolidatedOrder consolidatedItem = consolidatedMap.get(key);
+                consolidatedItem.setQuantity(consolidatedItem.getQuantity() + 1);
+            } else {
+                ConsolidatedOrder consolidatedItem = new ConsolidatedOrder(item, 1, option, remark, status);
+                consolidatedMap.put(key, consolidatedItem);
+            }
+        }
+
+        return new ArrayList<>(consolidatedMap.values());
     }
 }

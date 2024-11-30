@@ -30,7 +30,7 @@
                     </HBox.margin>
                     <graphic>
                         <ImageView fitWidth="40" fitHeight="40">
-                            <Image url="@../images/logout.png"/>
+                            <Image url="@../../images/logout.png"/>
                         </ImageView>
                     </graphic>
                 </Button>

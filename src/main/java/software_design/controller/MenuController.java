@@ -8,10 +8,10 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import software_design.model.TableManager;
+import software_design.view.MenuPage.MenuView;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import software_design.model.Table;
-import software_design.view.MenuView;
 import software_design.App;
 import software_design.model.Menu;
 import software_design.model.MenuItem;
@@ -61,17 +61,17 @@ public class MenuController {
     @FXML
     private void handleLogout() {
         // Return to table selection page
-        App.setRoot("table_selection");
+        App.setRoot("TableSelectionPage/table_selection");
     }
 
     @FXML
     private void handleCartClick() {
-        App.setRoot("cart");
+        App.setRoot("CartPage/cart");
     }
 
     @FXML
     private void handleOrderClick() {
-        App.setRoot("order");
+        App.setRoot("OrderPage/order");
     }
 
     private void handleFilterClick(String category) {
@@ -92,7 +92,7 @@ public class MenuController {
         selectedMenuItem = item;
             
         // Switch to item details view (now properly throws IOException)
-        App.setRoot("item_details");
+        App.setRoot("ItemDetailsPage/item_details");
     }
     
     // Getter for selected menu item

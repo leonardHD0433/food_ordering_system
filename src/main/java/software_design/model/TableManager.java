@@ -32,4 +32,8 @@ public class TableManager {
     public Table getCurrentTable() {
         return currentTable;
     }
+
+    public Table[] getAllTables() {
+        return tables;
+    }
 }

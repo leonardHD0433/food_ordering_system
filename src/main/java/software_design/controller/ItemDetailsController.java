@@ -10,7 +10,7 @@ import javafx.stage.Window;
 import software_design.App;
 import software_design.model.*;
 import software_design.model.MenuItem;
-import software_design.view.ItemDetailsView;
+import software_design.view.ItemDetailsPage.ItemDetailsView;
 import javafx.util.Duration;
 
 public class ItemDetailsController {
@@ -50,12 +50,12 @@ public class ItemDetailsController {
     @FXML
     private void handleClose() {
         view.reset();
-        App.setRoot("menu");
+        App.setRoot("MenuPage/menu");
     }
 
     @FXML
     private void handleCartClick() {
-        App.setRoot("cart");
+        App.setRoot("CartPage/cart");
     }
 
     @FXML
@@ -86,7 +86,7 @@ public class ItemDetailsController {
         // Reset and return to menu
         view.reset();
         showTemporaryAlert("Item added to cart successfully!", "#4CAF50");
-        App.setRoot("menu");
+        App.setRoot("MenuPage/menu");
     }
 
     private boolean isValidRemarks(String remarks) {

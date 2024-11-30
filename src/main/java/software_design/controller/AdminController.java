@@ -3,7 +3,7 @@ package software_design.controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import software_design.App;
-import software_design.view.AdminView;
+import software_design.view.AdminPage.AdminView;
 
 public class AdminController {
     @FXML private Button modifyMenuButton;
@@ -20,12 +20,12 @@ public class AdminController {
     
     @FXML
     private void handleModifyMenu() {
-        App.setRoot("menu_modification");
+        App.setRoot("MenuModificationPage/menu_modification");
     }
     
     @FXML
     private void handleProcessOrder() {
-        App.setRoot("order_processing");
+        App.setRoot("OrderProcessingPage/process_order");
     }
     
     @FXML
@@ -35,6 +35,6 @@ public class AdminController {
 
     @FXML
     private void handleSwitchCustomer() {
-        App.setRoot("table_selection");
+        App.setRoot("TableSelectionPage/table_selection");
     }
 }

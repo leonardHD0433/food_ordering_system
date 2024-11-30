@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="software_design.controller.ProcessOrderController">
+    <top>
+        <HBox spacing="10" alignment="CENTER">
+            <Button fx:id="backButton" text="Back" onAction="#handleBackClick">
+                <HBox.margin>
+                    <Insets left="10"/>
+                </HBox.margin>
+            </Button>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="Order Processing" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+        </HBox>
+    </top>
+    <center>
+        <ScrollPane fitToWidth="true">
+            <VBox fx:id="ordersContainer" spacing="10">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

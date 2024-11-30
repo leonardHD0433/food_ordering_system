@@ -16,9 +16,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import software_design.App;
 import software_design.model.Cart;
-import software_design.view.CartView;
 import software_design.model.MenuItem;
 import software_design.model.TableManager;
+import software_design.view.CartPage.CartView;
 import software_design.model.Table;
 import software_design.model.Order;
 import javafx.event.EventHandler;
@@ -109,7 +109,7 @@ public class CartController
     @FXML
     private void handleBackClick() 
     {
-        App.setRoot("menu");
+        App.setRoot("MenuPage/menu");
     }
 
     @FXML
@@ -146,7 +146,7 @@ public class CartController
                 currentTable.clearCart();
 
                 showTemporaryAlert("Order placed successfully!", "#4CAF50");
-                App.setRoot("menu");
+                App.setRoot("MenuPage/menu");
             } catch (Exception e) {
                 Alert error = new Alert(Alert.AlertType.ERROR);
                 error.setTitle("Error");

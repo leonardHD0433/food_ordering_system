@@ -1,4 +1,4 @@
-package software_design.view;
+package software_design.view.CartPage;
 
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;

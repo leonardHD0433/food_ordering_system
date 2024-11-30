@@ -8,8 +8,9 @@ import javafx.stage.FileChooser;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
 import software_design.model.MenuItem;
+import software_design.view.AdminItemDetailsPage.ItemDetailsAdminView;
 import software_design.App;
-import software_design.view.ItemDetailsAdminView;
+
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.nio.file.Files;
@@ -204,7 +205,7 @@ public class ItemDetailsAdminController {
                     // Delete the item from the database
                     Database.removeMenuITem(currentItem.getId());
                     // Navigate back to the admin menu
-                    App.setRoot("menu_admin");
+                    App.setRoot("AdminMenuPage/menu_admin");
                 } catch (SQLException e) {
                     // Show error alert
                     Alert errorAlert = new Alert(AlertType.ERROR);
@@ -219,6 +220,6 @@ public class ItemDetailsAdminController {
 
     @FXML
     private void handleClose() {
-        App.setRoot("menu_admin");
+        App.setRoot("AdminMenuPage/menu_admin");
     }
 }

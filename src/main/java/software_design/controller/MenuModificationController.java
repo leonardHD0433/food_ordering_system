@@ -3,7 +3,7 @@ package software_design.controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import software_design.App;
-import software_design.view.MenuModificationView;
+import software_design.view.MenuModificationPage.MenuModificationView;
 
 public class MenuModificationController {
     @FXML private Button backButton;
@@ -20,16 +20,16 @@ public class MenuModificationController {
     
     @FXML
     private void handleBack() {
-        App.setRoot("admin_homepage");
+        App.setRoot("AdminPage/admin_homepage");
     }
     
     @FXML
     private void handleAddItem() {
-        App.setRoot("item_addition");
+        App.setRoot("AddItemPage/item_addition");
     }
     
     @FXML
     private void handleEditItem() {
-        App.setRoot("menu_admin");
+        App.setRoot("AdminMenuPage/menu_admin");
     }
 }

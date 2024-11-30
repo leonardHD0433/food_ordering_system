@@ -96,7 +96,7 @@ public class ItemAdditionController {
 
             menu.createItem(newItem);
             showSuccess("Item added successfully!");
-            App.setRoot("menu_modification");
+            App.setRoot("MenuModificationPage/menu_modification");
         } catch (Exception e) {
             showError("Error saving item: " + e.getMessage());
         }
@@ -104,7 +104,7 @@ public class ItemAdditionController {
 
     @FXML
     private void handleCancel() {
-        App.setRoot("menu_modification");
+        App.setRoot("MenuModificationPage/menu_modification");
     }
 
     private boolean validateInputs() {

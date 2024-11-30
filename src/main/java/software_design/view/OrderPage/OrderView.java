@@ -1,4 +1,4 @@
-package software_design.view;
+package software_design.view.OrderPage;
 
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;

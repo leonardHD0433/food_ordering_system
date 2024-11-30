@@ -1,4 +1,4 @@
-package software_design.view;
+package software_design.view.AdminPage;
 
 import javafx.scene.control.Button;
 

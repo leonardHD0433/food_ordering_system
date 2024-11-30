@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import software_design.App;
 import software_design.model.TableManager;
-import software_design.view.TableSelectionView;
+import software_design.view.TableSelectionPage.TableSelectionView;
 
 // TableSelectionController.java
 public class TableSelectionController {
@@ -35,7 +35,7 @@ public class TableSelectionController {
 
     @FXML
     private void handleSwitchAdmin() {
-        App.setRoot("admin_homepage");
+        App.setRoot("AdminPage/admin_homepage");
     }
 
     @FXML
@@ -67,6 +67,6 @@ public class TableSelectionController {
 
         tableManager = TableManager.getInstance();
         tableManager.getTable(value);
-        App.setRoot("menu");
+        App.setRoot("MenuPage/menu");
     }
 }

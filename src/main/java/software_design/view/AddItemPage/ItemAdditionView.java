@@ -1,4 +1,4 @@
-package software_design.view;
+package software_design.view.AddItemPage;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;

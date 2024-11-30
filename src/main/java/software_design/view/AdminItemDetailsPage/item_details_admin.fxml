@@ -47,14 +47,14 @@
                     <Button fx:id="editButton" onAction="#handleEdit">
                         <graphic>
                             <ImageView fitWidth="30" fitHeight="30">
-                                <Image url="@../images/edit.png"/>
+                                <Image url="@../../images/edit.png"/>
                             </ImageView>
                         </graphic>
                     </Button>
                     <Button fx:id="deleteButton" onAction="#handleDelete">
                         <graphic>
                             <ImageView fitWidth="30" fitHeight="30">
-                                <Image url="@../images/bin.png"/>
+                                <Image url="@../../images/bin.png"/>
                             </ImageView>
                         </graphic>
                     </Button>

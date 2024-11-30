@@ -9,10 +9,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import software_design.view.MenuView;
 import software_design.App;
 import software_design.model.Menu;
 import software_design.model.MenuItem;
+import software_design.view.MenuPage.MenuView;
 
 public class ItemEditingController {
     @FXML private GridPane menuGrid;
@@ -46,7 +46,7 @@ public class ItemEditingController {
 
     @FXML
     private void handleLogout() {
-        App.setRoot("menu_modification");
+        App.setRoot("MenuModificationPage/menu_modification");
     }
 
     private void handleFilterClick(String category) {
@@ -67,7 +67,7 @@ public class ItemEditingController {
         selectedMenuItem = item;
             
         // Switch to item details view (now properly throws IOException)
-        App.setRoot("item_details_admin");
+        App.setRoot("AdminItemDetailsPage/item_details_admin");
     }
     
     // Getter for selected menu item

@@ -1,4 +1,4 @@
-package software_design.view;
+package software_design.view.MenuPage;
 
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
