@@ -3,7 +3,6 @@ package software_design.controller;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import software_design.model.*;
 import software_design.view.OrderProcessingPage.ProcessOrderView;
 import software_design.App;
