@@ -11,6 +11,8 @@ import java.io.File;
 import java.nio.file.Files;
 import java.sql.SQLException;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
+
 import java.util.List;
 
 public class ItemAdditionController {
@@ -108,21 +110,25 @@ public class ItemAdditionController {
     }
 
     private boolean validateInputs() {
+        //Validate category
         if (categoryComboBox.getValue() == null || categoryComboBox.getValue().trim().isEmpty()) {
             showError("Please select or enter a category");
             return false;
         }
 
+        // Validate name
         if (nameField.getText().trim().isEmpty()) {
             showError("Please enter item name");
             return false;
         }
 
+        // Validate description
         if (descriptionArea.getText().trim().isEmpty()) {
             showError("Please enter item description");
             return false;
         }
 
+        // Validate price
         try {
             double price = Double.parseDouble(priceField.getText());
             if (price <= 0) {
@@ -134,6 +140,7 @@ public class ItemAdditionController {
             return false;
         }
 
+        // Validate Image
         if (selectedImageData == null) {
             showError("Please select an image");
             return false;
@@ -147,6 +154,8 @@ public class ItemAdditionController {
         alert.setTitle("Error");
         alert.setHeaderText(null);
         alert.setContentText(message);
+        Stage mainWindow = (Stage) App.getScene().getWindow();
+        alert.initOwner(mainWindow);
         alert.showAndWait();
     }
 
@@ -155,6 +164,8 @@ public class ItemAdditionController {
         alert.setTitle("Success");
         alert.setHeaderText(null);
         alert.setContentText(message);
+        Stage mainWindow = (Stage) App.getScene().getWindow();
+        alert.initOwner(mainWindow);
         alert.showAndWait();
     }
 }

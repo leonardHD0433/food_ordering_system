@@ -30,7 +30,7 @@ public class AdminController {
     
     @FXML
     private void handleGenerateReceipt() {
-        App.setRoot("receipt_generation");
+        App.setRoot("ReceiptGenerationPage/generate_receipt");
     }
 
     @FXML

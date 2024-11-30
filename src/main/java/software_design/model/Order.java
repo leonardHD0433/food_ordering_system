@@ -37,7 +37,7 @@ public class Order {
         
             for (int q = 0; q < quantity; q++) {
                 this.items.add(item);
-                this.quantities.add(1); // Each item is treated individually
+                this.quantities.add(1);
                 this.options.add(option);
                 this.remarks.add(remark);
                 this.itemStatus.add("Pending");
@@ -106,6 +106,10 @@ public class Order {
 
     public double getTotal() {
         return total;
+    }
+
+    public boolean hasPendingItems() {
+        return itemStatus.contains("Pending");
     }
 
     public String getOrderTime() {

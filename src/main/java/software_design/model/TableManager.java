@@ -36,4 +36,12 @@ public class TableManager {
     public Table[] getAllTables() {
         return tables;
     }
+
+    public void clearTable(int tableNumber) {
+        if (tableNumber < 1 || tableNumber > MAX_TABLES) {
+            throw new IllegalArgumentException("Invalid table number");
+        }
+        tables[tableNumber - 1].clearCart();
+        tables[tableNumber - 1].setOrder(null);
+    }
 }

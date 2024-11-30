@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="software_design.controller.ProcessOrderController">
     <top>
-        <HBox spacing="10" alignment="CENTER">
-            <Button fx:id="backButton" text="Back" onAction="#handleBackClick">
-                <HBox.margin>
-                    <Insets left="10"/>
-                </HBox.margin>
-            </Button>
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            
+            <Label text="Filter by Table:"/>
+            <ComboBox fx:id="tableFilterComboBox" promptText="All Tables" onAction="#handleTableFilterChange"/>
+            
             <Region HBox.hgrow="ALWAYS"/>
             <Label text="Order Processing" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
             <Region HBox.hgrow="ALWAYS"/>
+
+            <Button fx:id="backButton" text="Back" onAction="#handleBackClick"/>
         </HBox>
     </top>
     <center>
