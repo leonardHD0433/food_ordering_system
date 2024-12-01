@@ -54,11 +54,6 @@ public class ItemDetailsController {
     }
 
     @FXML
-    private void handleCartClick() {
-        App.setRoot("CartPage/cart");
-    }
-
-    @FXML
     private void handleAddToCart() {
         if (currentItem == null) {
             return;

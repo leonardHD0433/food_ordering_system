@@ -50,7 +50,7 @@ public class ItemDetailsAdminController {
         itemNameField.setText(item.getName());
         itemDescArea.setText(item.getDescription());
         itemPriceField.setText(String.valueOf(item.getPrice()));
-        itemOptionsArea.setText(item.getOptions());
+        itemOptionsArea.setText(item.getOptions().replace("\"", "").trim());
         availabilityCheckBox.setSelected(item.isAvailable());
 
         // Load item image
@@ -86,6 +86,7 @@ public class ItemDetailsAdminController {
                 showError("Item description cannot be empty");
                 return;
             }
+
             if (itemPriceField.getText().trim().isEmpty() || !itemPriceField.getText().matches("^\\d+(\\.\\d+)?$") || 
             Double.parseDouble(itemPriceField.getText()) == 0) {
                 showError("Item price cannot be empty, must be a number, and must be greater than 0");
@@ -94,6 +95,12 @@ public class ItemDetailsAdminController {
 
             if (selectedImageData == null) {
                 showError("Item image cannot be empty");
+                return;
+            }
+
+            // Validate option format
+            if (!itemOptionsArea.getText().trim().isEmpty() && !itemOptionsArea.getText().matches("^[a-zA-Z]+,[a-zA-Z]+,[a-zA-Z]+$")) {
+                showError("Options must be in the format: option1, option2, option3");
                 return;
             }
 

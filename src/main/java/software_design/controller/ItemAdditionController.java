@@ -32,7 +32,7 @@ public class ItemAdditionController {
     private void initialize() {
         menu = new Menu();
         try {
-            List<String>category = menu.getDistinctCategories();
+            List<String>category = menu.getDistinctCategories("admin");
             category.remove("All");
             categoryComboBox.getItems().addAll(category);
         } catch (SQLException e) {
@@ -143,6 +143,13 @@ public class ItemAdditionController {
         // Validate Image
         if (selectedImageData == null) {
             showError("Please select an image");
+            return false;
+        }
+
+        // Validate option format
+        String options = optionsField.getText().trim();
+        if (!options.isEmpty() && !options.matches("^[a-zA-Z]+,[a-zA-Z]+,[a-zA-Z]+$")) {
+            showError("Options must be in the format (Header,Option1,Option2)");
             return false;
         }
 

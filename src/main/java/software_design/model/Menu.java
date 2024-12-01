@@ -11,10 +11,15 @@ public class Menu {
     private List<MenuItem> menuItems;
     private List<String> distinct_categories;
 
-    public List<MenuItem> getMenuItems() throws SQLException 
+    public List<MenuItem> getMenuItems(String role) throws SQLException 
     {
+        String query = "";
         menuItems = new ArrayList<>();
-        String query = "SELECT * FROM menu_table WHERE ItemAvailability = true";
+        if (role.equals("admin")) {
+            query = "SELECT * FROM menu_table";
+        } else {
+            query = "SELECT * FROM menu_table WHERE ItemAvailability = true";
+        }
         
         try (Connection conn = Database.getConnection();
              Statement stmt = conn.createStatement();
@@ -55,12 +60,12 @@ public class Menu {
         }
     }
 
-    public List<String> getDistinctCategories() throws SQLException 
+    public List<String> getDistinctCategories(String role) throws SQLException 
     {
         distinct_categories = new ArrayList<>();
         distinct_categories.add("All"); // Add default option
     
-        List<MenuItem> menuItems = getMenuItems();
+        List<MenuItem> menuItems = getMenuItems(role);
     
         // Use stream to get distinct distinct_categories
         distinct_categories.addAll(

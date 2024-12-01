@@ -14,22 +14,7 @@
                 </padding>
                 <!-- Left side - Table number -->
                 <Label fx:id="tableNumberLabel" 
-                    style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: black;"/>
-                <!-- Spacer to push cart to right -->
-                <Region HBox.hgrow="ALWAYS"/>
-                <!-- Right side - Cart button -->
-                <Button fx:id="cartButton" onAction="#handleCartClick"
-                    style="-fx-background-color: #E0E0E0;
-                           -fx-border-color: #808080;
-                           -fx-border-width: 1px;
-                           -fx-border-radius: 5px;
-                           -fx-background-radius: 5px;">
-                    <graphic>
-                        <ImageView fitWidth="40" fitHeight="40">
-                            <Image url="@../../images/shopping-cart.png"/>
-                        </ImageView>
-                    </graphic>
-                </Button>
+                    style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: black;"/>  
             </HBox>
             
             <!-- Menu title -->

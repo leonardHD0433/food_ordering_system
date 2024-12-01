@@ -41,8 +41,8 @@ public class MenuController {
         menuView = new MenuView(menuGrid, tableNumberLabel, filterContainer, this::handleMenuItemClick);
         
         try {
-            menuItems = menu.getMenuItems();
-            categories = menu.getDistinctCategories();
+            menuItems = menu.getMenuItems("customer");
+            categories = menu.getDistinctCategories("customer");
 
             menuView.setupMenuGrid(menuItems);
             menuView.setTableNumberLabel(currentTable.getTableId());
@@ -77,7 +77,7 @@ public class MenuController {
     private void handleFilterClick(String category) {
         try {
             List<MenuItem> filteredItems = "All".equals(category) ? 
-                menu.getMenuItems() : 
+                menu.getMenuItems("customer") : 
                 menuItems.stream()
                     .filter(item -> category.equals(item.getCategory()))
                     .collect(Collectors.toList());

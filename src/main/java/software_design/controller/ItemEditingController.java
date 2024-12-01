@@ -33,8 +33,8 @@ public class ItemEditingController {
         menuView = new MenuView(menuGrid, tableNumberLabel, filterContainer, this::handleMenuItemClick);
         
         try {
-            menuItems = menu.getMenuItems();
-            categories = menu.getDistinctCategories();
+            menuItems = menu.getMenuItems("admin");
+            categories = menu.getDistinctCategories("admin");
 
             menuView.setupMenuGrid(menuItems);
             menuView.setupFilterButtons(categories, this::handleFilterClick);
@@ -52,7 +52,7 @@ public class ItemEditingController {
     private void handleFilterClick(String category) {
         try {
             List<MenuItem> filteredItems = "All".equals(category) ? 
-                menu.getMenuItems() : 
+                menu.getMenuItems("admin") : 
                 menuItems.stream()
                     .filter(item -> category.equals(item.getCategory()))
                     .collect(Collectors.toList());

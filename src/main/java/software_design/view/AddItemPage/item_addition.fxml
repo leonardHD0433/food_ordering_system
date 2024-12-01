@@ -43,7 +43,7 @@
             </GridPane>
 
             <HBox spacing="10" alignment="CENTER">
-                <Button fx:id="saveButton" text="Save Item" onAction="#handleSave"/>
+                <Button fx:id="saveButton" text="Add" onAction="#handleSave"/>
                 <Button fx:id="cancelButton" text="Cancel" onAction="#handleCancel"/>
             </HBox>
         </VBox>
