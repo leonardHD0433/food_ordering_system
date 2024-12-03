@@ -35,9 +35,11 @@ public class ItemDetailsAdminController {
     private MenuItem currentItem;
     private boolean isEditing = false;
     private byte[] selectedImageData;
+    private Database database;
 
     @FXML
     public void initialize() {
+        database = Database.getInstance();
         // Retrieve the selected MenuItem (assuming you have a method to do so)
         currentItem = ItemEditingController.getSelectedMenuItem();
         if (currentItem != null) {
@@ -114,7 +116,7 @@ public class ItemDetailsAdminController {
                 currentItem.setImage(selectedImageData);
     
                 // Update the item in the database
-                Database.updateMenuItem(currentItem.getCategory(), 
+                database.updateMenuItem(currentItem.getCategory(), 
                                      currentItem.getName(), 
                                      currentItem.getDescription(), 
                                      currentItem.getOptions(), 
@@ -210,7 +212,7 @@ public class ItemDetailsAdminController {
             if (response == ButtonType.OK) {
                 try {
                     // Delete the item from the database
-                    Database.removeMenuITem(currentItem.getId());
+                    database.removeMenuITem(currentItem.getId());
                     // Navigate back to the admin menu
                     App.setRoot("AdminMenuPage/menu_admin");
                 } catch (SQLException e) {

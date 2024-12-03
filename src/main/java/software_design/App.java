@@ -58,19 +58,16 @@ public class App extends Application {
 
     public static void main(String[] args) {
         try {
-            // Test creating the database if it does not exist
-            Database.createDatabase();
+            Database database = Database.getInstance();
+            database.createDatabase();
             System.out.println("Database creation checked.");
-            
-            // Create tables using raw SQL statements
-            Database.createTables();
-            System.out.println("Tables created successfully.");
-
-            Database.importMenuData();
-            System.out.println("Menu data imported successfully.");
+            database.createTables();
+            System.out.println("Tables creation checked.");
+            database.importMenuData();
+            System.out.println("Menu data import checked.");
 
             // Test getting a connection to the database
-            Connection connection = Database.getConnection();
+            Connection connection = database.getConnection();
             if (connection != null) {
                 System.out.println("Connection successful!");
                 connection.close();

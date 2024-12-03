@@ -12,20 +12,38 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.io.File;
 
-
 import io.github.cdimascio.dotenv.Dotenv;
 
 public class Database {
-    private static final Dotenv dotenv = Dotenv.load();
-    private static final String DB_HOST = dotenv.get("DB_HOST");
-    private static final String DB_PORT = dotenv.get("DB_PORT");
-    private static final String DB_NAME = dotenv.get("DB_NAME");
-    private static final String DB_USER = dotenv.get("DB_USER");
-    private static final String DB_PASS = dotenv.get("DB_PASSWORD");
-    private static final String DB_URL_NO_DB = "jdbc:mysql://" + DB_HOST + ":" + DB_PORT;
-    private static final String DB_URL = DB_URL_NO_DB + "/" + DB_NAME;
+    private static Database instance;
+    private Dotenv dotenv = Dotenv.load();
+    private String DB_HOST;
+    private String DB_PORT;
+    private String DB_NAME;
+    private String DB_USER;
+    private String DB_PASS;
+    private String DB_URL_NO_DB;
+    private String DB_URL;
 
-    public static void createDatabase() throws SQLException 
+    Database()
+    {
+        DB_HOST = dotenv.get("DB_HOST");
+        DB_PORT = dotenv.get("DB_PORT");
+        DB_USER = dotenv.get("DB_USER");
+        DB_PASS = dotenv.get("DB_PASSWORD");
+        DB_NAME = dotenv.get("DB_NAME");
+        DB_URL_NO_DB = "jdbc:mysql://" + DB_HOST + ":" + DB_PORT;
+        DB_URL = DB_URL_NO_DB + "/" + DB_NAME;
+    }
+
+    public static synchronized Database getInstance() {
+        if (instance == null) {
+            instance = new Database();
+        }
+        return instance;
+    }
+
+    public void createDatabase() throws SQLException 
     {
         // Create the database if it does not exist
         try (Connection conn = DriverManager.getConnection(DB_URL_NO_DB, DB_USER, DB_PASS);
@@ -38,12 +56,12 @@ public class Database {
         }
     }
 
-    public static Connection getConnection() throws SQLException 
+    public Connection getConnection() throws SQLException 
     {
         return DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
     }
 
-    public static void createTables() throws SQLException 
+    public void createTables() throws SQLException 
     {
         String createMenuTableSQL = "CREATE TABLE IF NOT EXISTS menu_table (" +
                 "ItemId INT AUTO_INCREMENT PRIMARY KEY, " +
@@ -70,7 +88,7 @@ public class Database {
         }
     }
 
-    public static void importMenuData() throws SQLException, IOException {
+    public void importMenuData() throws SQLException, IOException {
         String insertSQL = "INSERT INTO menu_table (ItemCategory, ItemName, ItemDescription, ItemOptions, ItemPrice, ItemAvailability, ItemImage) VALUES (?, ?, ?, ?, ?, ?, ?)";
         String checkSQL = "SELECT COUNT(*) FROM menu_table";
         String csvFile = "src/main/java/software_design/database/data/menu.csv";
@@ -127,7 +145,7 @@ public class Database {
         }
     }
 
-    public static void updateMenuItem(String category, String name, String description, String options, double price, boolean isAvailable, byte[] image , int id) throws SQLException {
+    public void updateMenuItem(String category, String name, String description, String options, double price, boolean isAvailable, byte[] image , int id) throws SQLException {
         String updateSQL = "UPDATE menu_table SET " +
                           "ItemCategory = ?, " +
                           "ItemName = ?, " +
@@ -160,7 +178,7 @@ public class Database {
         }
     }
 
-    public static void removeMenuITem(int id) throws SQLException {
+    public void removeMenuITem(int id) throws SQLException {
         String deleteSQL = "DELETE FROM menu_table WHERE ItemId = ?";
     
         try (Connection conn = getConnection();
