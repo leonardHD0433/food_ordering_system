@@ -36,12 +36,14 @@ public class ItemDetailsAdminController {
     private boolean isEditing = false;
     private byte[] selectedImageData;
     private Database database;
+    private ItemDetailsAdminView itemDetailsAdminView;
 
     @FXML
     public void initialize() {
         database = Database.getInstance();
+        itemDetailsAdminView = new ItemDetailsAdminView();
         // Retrieve the selected MenuItem (assuming you have a method to do so)
-        currentItem = ItemEditingController.getSelectedMenuItem();
+        currentItem = MenuAdminController.getSelectedMenuItem();
         if (currentItem != null) {
             displayItemDetails(currentItem);
         }
@@ -78,7 +80,7 @@ public class ItemDetailsAdminController {
             isEditing = true;
 
             // Change edit button icon to save icon
-            ItemDetailsAdminView.setSaveIcon(editButton);
+            itemDetailsAdminView.setSaveIcon(editButton);
         } else {
             if (itemNameField.getText().trim().isEmpty()) {
                 showError("Item name cannot be empty");
@@ -135,7 +137,7 @@ public class ItemDetailsAdminController {
                 isEditing = false;
     
                 // Change icon back to edit icon
-                ItemDetailsAdminView.setEditIcon(editButton);
+                itemDetailsAdminView.setEditIcon(editButton);
     
             } catch (SQLException e) {
                 // Show error alert

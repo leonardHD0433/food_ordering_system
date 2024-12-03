@@ -6,7 +6,7 @@ import javafx.scene.image.ImageView;
 
 public class ItemDetailsAdminView {
 
-    public static void setSaveIcon(Button button) {
+    public void setSaveIcon(Button button) {
         try {
             Image saveIcon = new Image(ItemDetailsAdminView.class.getResourceAsStream("/software_design/images/save.png"));
             if (saveIcon.isError()) {
@@ -23,7 +23,7 @@ public class ItemDetailsAdminView {
         }
     }
 
-    public static void setEditIcon(Button button) {
+    public void setEditIcon(Button button) {
         try {
             Image editIcon = new Image(ItemDetailsAdminView.class.getResourceAsStream("/software_design/images/edit.png"));
             if (editIcon.isError()) {

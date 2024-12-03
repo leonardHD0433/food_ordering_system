@@ -14,7 +14,7 @@ import software_design.model.Menu;
 import software_design.model.MenuItem;
 import software_design.view.MenuPage.MenuView;
 
-public class ItemEditingController {
+public class MenuAdminController {
     @FXML private GridPane menuGrid;
     @FXML private Label tableNumberLabel;
     @FXML private HBox filterContainer;

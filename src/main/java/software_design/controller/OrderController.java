@@ -21,12 +21,16 @@ public class OrderController {
     
     private Table currentTable;
     private Order currentOrder;
+    private OrderView orderView;
+    private CartView cartView;
     
     @FXML
     private void initialize() {
+        orderView = new OrderView();
+        cartView = new CartView();
         currentTable = TableManager.getInstance().getCurrentTable();
         currentOrder = currentTable.getOrder();
-        CartView.styleBackButton(backButton);
+        cartView.styleBackButton(backButton);
         
         if (currentOrder != null) {
             orderTimeLabel.setText("Last Updated: " + currentOrder.getOrderTime());
@@ -48,7 +52,7 @@ public class OrderController {
         orderItemsContainer.getChildren().clear();
         List<ConsolidatedOrder> consolidatedItems = currentOrder.getConsolidatedView();
         for (ConsolidatedOrder consolidatedItem : consolidatedItems) {
-            VBox itemView = OrderView.createOrderItemView(
+            VBox itemView = orderView.createOrderItemView(
                 consolidatedItem.getItem(),
                 consolidatedItem.getQuantity(),
                 consolidatedItem.getOption(),

@@ -37,22 +37,24 @@ public class CartController
     private VBox itemBox;
     private Order existingOrder;
     private Order newOrder;
+    private CartView cartView;
 
 
     @FXML
     private void initialize() 
     {
+        cartView = new CartView();
         tableManager = TableManager.getInstance();
         currentTable = tableManager.getCurrentTable();
         this.cart = currentTable.getCart();
-        CartView.styleBackButton(backButton);
+        cartView.styleBackButton(backButton);
         updateCartView();
     }
 
     private void updateCartView() {
         if (cart.isEmpty()) {
-            CartView.showEmptyCart(cartItemsContainer);
-            CartView.hideBottomControls(bottomControls);
+            cartView.showEmptyCart(cartItemsContainer);
+            cartView.hideBottomControls(bottomControls);
         } else {
             cartItemsContainer.getChildren().clear();
             List<MenuItem> items = cart.getItems();
@@ -90,7 +92,7 @@ public class CartController
                     }
                 };
 
-                itemBox = CartView.createCartItemView(
+                itemBox = cartView.createCartItemView(
                     items.get(i),
                     quantities.get(i),
                     options.get(i),
@@ -102,7 +104,7 @@ public class CartController
             }
             
             totalLabel.setText(String.format("%.2f", cart.getTotal()));
-            CartView.showBottomControls(bottomControls);
+            cartView.showBottomControls(bottomControls);
         }
     }
 

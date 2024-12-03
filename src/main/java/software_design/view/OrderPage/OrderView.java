@@ -10,7 +10,7 @@ import software_design.model.MenuItem;
 
 public class OrderView {
     
-    public static VBox createOrderItemView(MenuItem item, int quantity, String option, String remarks, String status) {
+    public VBox createOrderItemView(MenuItem item, int quantity, String option, String remarks, String status) {
         VBox itemBox = new VBox(5);
         itemBox.setStyle(
             "-fx-background-color: white;" +

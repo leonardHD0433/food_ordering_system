@@ -16,6 +16,8 @@ public class AdminController {
     private ModifyMenuCommand modifyMenuCommand;
     private ProcessOrderCommand processOrderCommand;
     private GenerateReceiptCommand generateReceiptCommand;
+
+    private AdminView view;
     
     @FXML
     private void initialize() {
@@ -23,7 +25,7 @@ public class AdminController {
         processOrderCommand = new ProcessOrderCommand(this);
         generateReceiptCommand = new GenerateReceiptCommand(this);
 
-        AdminView view = new AdminView(modifyMenuButton, processOrderButton, generateReceiptButton, 
+        view = new AdminView(modifyMenuButton, processOrderButton, generateReceiptButton, 
                              modifyMenuCommand, processOrderCommand, generateReceiptCommand);
 
         view.styleButtons();

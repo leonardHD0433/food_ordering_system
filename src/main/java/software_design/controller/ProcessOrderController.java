@@ -22,8 +22,11 @@ public class ProcessOrderController {
     @FXML
     private Button backButton;
 
+    private ProcessOrderView processOrderView;
+
     @FXML
     private void initialize() {
+        processOrderView = new ProcessOrderView();
         loadTableIds();
         loadPendingOrders();
     }
@@ -78,7 +81,7 @@ public class ProcessOrderController {
 
                         final int itemIndex = i;
                         final int tableID = tableId;
-                        Node itemNode = ProcessOrderView.createOrderProcessingItemView(
+                        Node itemNode = processOrderView.createOrderProcessingItemView(
                             item, 1, option, remarks, tableID, itemIndex, e -> handleCompleteItem(tableID, itemIndex)
                         );
                         ordersContainer.getChildren().add(itemNode);
@@ -88,7 +91,7 @@ public class ProcessOrderController {
         }
 
         if (!hasPendingOrders) {
-            ordersContainer.getChildren().add(ProcessOrderView.createNoOrdersLabel());
+            ordersContainer.getChildren().add(processOrderView.createNoOrdersLabel());
         }
     }
 

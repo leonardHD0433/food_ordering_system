@@ -7,6 +7,8 @@ import javafx.stage.FileChooser;
 import software_design.App;
 import software_design.model.Menu;
 import software_design.model.MenuItem;
+import software_design.view.AddItemPage.ItemAdditionView;
+
 import java.io.File;
 import java.nio.file.Files;
 import java.sql.SQLException;
@@ -22,15 +24,20 @@ public class ItemAdditionController {
     @FXML private TextField priceField;
     @FXML private TextField optionsField;
     @FXML private Button imageButton;
+    @FXML private Button saveButton;
+    @FXML private Button cancelButton;
     @FXML private ImageView imagePreview;
     @FXML private Label imageLabel;
     
     private byte[] selectedImageData;
     private Menu menu;
+    private ItemAdditionView itemAdditionView;
 
     @FXML
     private void initialize() {
         menu = new Menu();
+        itemAdditionView = new ItemAdditionView();
+        itemAdditionView.styleControls(saveButton, cancelButton, imageButton, categoryComboBox, nameField, descriptionArea, priceField, optionsField);
         try {
             List<String>category = menu.getDistinctCategories("admin");
             category.remove("All");

@@ -19,7 +19,7 @@ public class ItemAdditionView {
         "-fx-background-color: #666666;" +
         "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0, 0, 1);";
 
-    public static void styleControls(Button saveButton, Button cancelButton, 
+    public void styleControls(Button saveButton, Button cancelButton, 
                                    Button imageButton, ComboBox<?> categoryBox,
                                    TextField nameField, TextArea descArea,
                                    TextField priceField, TextField optionsField) {
@@ -35,7 +35,7 @@ public class ItemAdditionView {
         optionsField.setStyle(inputStyle);
     }
 
-    private static void styleButton(Button button) {
+    private void styleButton(Button button) {
         button.setStyle(BUTTON_STYLE);
         button.setOnMouseEntered(e -> button.setStyle(BUTTON_HOVER_STYLE));
         button.setOnMouseExited(e -> button.setStyle(BUTTON_STYLE));

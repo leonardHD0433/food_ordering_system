@@ -15,7 +15,7 @@ import software_design.model.MenuItem;
 
 public class CartView {
     
-    public static void showEmptyCart(VBox container) {
+    public void showEmptyCart(VBox container) {
         container.getChildren().clear();
         Label emptyLabel = new Label("WOW! SUCH EMPTY...");
         emptyLabel.setStyle("-fx-font-size: 20px; -fx-text-fill: #808080;");
@@ -27,17 +27,17 @@ public class CartView {
         container.getChildren().add(centerBox);
     }
     
-    public static void hideBottomControls(VBox bottomControls) {
+    public void hideBottomControls(VBox bottomControls) {
         bottomControls.setVisible(false);
         bottomControls.setManaged(false);
     }
     
-    public static void showBottomControls(VBox bottomControls) {
+    public void showBottomControls(VBox bottomControls) {
         bottomControls.setVisible(true);
         bottomControls.setManaged(true);
     }
 
-    public static VBox createCartItemView(MenuItem item, int quantity, String option, String remarks, EventHandler<ActionEvent> minusHandler, EventHandler<ActionEvent> plusHandler) 
+    public VBox createCartItemView(MenuItem item, int quantity, String option, String remarks, EventHandler<ActionEvent> minusHandler, EventHandler<ActionEvent> plusHandler) 
     {
         VBox itemBox = new VBox(5);
         itemBox.setStyle(
@@ -65,7 +65,6 @@ public class CartView {
         minusBtn.setStyle("-fx-min-width: 30px;");
         plusBtn.setStyle("-fx-min-width: 30px;");
 
-        // Fix alignment for subtotal label
         quantityLabel.setStyle("-fx-min-width: 30px; -fx-alignment: center;");
         subtotalLabel.setStyle("-fx-font-weight: bold; -fx-min-width: 80px;");
         subtotalLabel.setAlignment(Pos.CENTER_RIGHT);
@@ -96,7 +95,7 @@ public class CartView {
         return itemBox;
     }
 
-    public static void styleBackButton(Button backButton) {
+    public void styleBackButton(Button backButton) {
         backButton.setStyle(
             "-fx-background-color: #E0E0E0;" +
             "-fx-border-color: #808080;" +

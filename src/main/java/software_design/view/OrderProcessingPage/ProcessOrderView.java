@@ -10,7 +10,7 @@ import software_design.model.MenuItem;
 
 public class ProcessOrderView {
 
-    public static VBox createOrderProcessingItemView(
+    public VBox createOrderProcessingItemView(
         MenuItem item,
         int quantity,
         String option,
@@ -42,7 +42,7 @@ public class ProcessOrderView {
         return itemBox;
     }
 
-    public static VBox createNoOrdersLabel() {
+    public VBox createNoOrdersLabel() {
         Label noOrdersLabel = new Label("No incoming orders.");
         noOrdersLabel.setStyle("-fx-font-size: 20px; -fx-text-fill: #808080;");
         
