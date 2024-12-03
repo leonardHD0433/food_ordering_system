@@ -44,7 +44,7 @@ public class CartController
     private void initialize() 
     {
         cartView = new CartView();
-        tableManager = TableManager.getInstance();
+        tableManager = TableManager.getInstance(); //Call to static creation method
         currentTable = tableManager.getCurrentTable();
         this.cart = currentTable.getCart();
         cartView.styleBackButton(backButton);

@@ -40,9 +40,8 @@ public class ItemDetailsAdminController {
 
     @FXML
     public void initialize() {
-        database = Database.getInstance();
+        database = Database.getInstance(); //Call to static creation method
         itemDetailsAdminView = new ItemDetailsAdminView();
-        // Retrieve the selected MenuItem (assuming you have a method to do so)
         currentItem = MenuAdminController.getSelectedMenuItem();
         if (currentItem != null) {
             displayItemDetails(currentItem);

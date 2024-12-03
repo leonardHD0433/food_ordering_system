@@ -13,10 +13,10 @@ import software_design.database.Database;
 import software_design.model.MenuItem;
 
 public class MenuRepository {
-    private final Database database;
+    private Database database;
 
     public MenuRepository() {
-        this.database = Database.getInstance();
+        this.database = Database.getInstance(); //Call to the static create method
     }
 
     public List<MenuItem> getMenuItems(String role) throws SQLException 

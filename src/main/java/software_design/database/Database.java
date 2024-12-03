@@ -15,7 +15,7 @@ import java.io.File;
 import io.github.cdimascio.dotenv.Dotenv;
 
 public class Database {
-    private static Database instance;
+    private static Database instance; //Add a private static field to the class for storing the singleton instance.
     private Dotenv dotenv = Dotenv.load();
     private String DB_HOST;
     private String DB_PORT;
@@ -25,7 +25,9 @@ public class Database {
     private String DB_URL_NO_DB;
     private String DB_URL;
 
-    Database()
+    // Make the constructor of the class private. 
+    // The static method of the class will still be able to call the constructor, but not the other objects.
+    private Database()
     {
         DB_HOST = dotenv.get("DB_HOST");
         DB_PORT = dotenv.get("DB_PORT");
@@ -36,6 +38,9 @@ public class Database {
         DB_URL = DB_URL_NO_DB + "/" + DB_NAME;
     }
 
+    // Implement “lazy initialization” inside the static method. 
+    // It should create a new object on its first call and put it into the static field. 
+    // The method should always return that instance on all subsequent calls.
     public static synchronized Database getInstance() {
         if (instance == null) {
             instance = new Database();
