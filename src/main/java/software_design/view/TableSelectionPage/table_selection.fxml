@@ -26,7 +26,7 @@
             </Button>
         </HBox>
 
-        <Label text="Western Harvest" 
+        <Label text="F . O . S" 
               style="-fx-font-weight: bold; -fx-font-size: 48px;">
             <padding>
                 <Insets bottom="20.0" />

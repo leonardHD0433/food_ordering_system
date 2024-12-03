@@ -5,8 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import software_design.database.Database;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -54,6 +57,29 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
+        try {
+            // Test creating the database if it does not exist
+            Database.createDatabase();
+            System.out.println("Database creation checked.");
+            
+            // Create tables using raw SQL statements
+            Database.createTables();
+            System.out.println("Tables created successfully.");
+
+            Database.importMenuData();
+            System.out.println("Menu data imported successfully.");
+
+            // Test getting a connection to the database
+            Connection connection = Database.getConnection();
+            if (connection != null) {
+                System.out.println("Connection successful!");
+                connection.close();
+            } else {
+                System.out.println("Failed to make connection!");
+            }
+        } catch (SQLException | IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
         launch();
     }
 }

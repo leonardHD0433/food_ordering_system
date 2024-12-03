@@ -29,17 +29,14 @@
 
         <Button fx:id="modifyMenuButton" 
                 text="Modify Menu" 
-                onAction="#handleModifyMenu"
                 style="-fx-min-width: 300; -fx-min-height: 70; -fx-font-size: 24px;"/>
                 
         <Button fx:id="processOrderButton" 
                 text="Process Order" 
-                onAction="#handleProcessOrder"
                 style="-fx-min-width: 300; -fx-min-height: 70; -fx-font-size: 24px;"/>
                 
         <Button fx:id="generateReceiptButton" 
                 text="Generate Receipt" 
-                onAction="#handleGenerateReceipt"
                 style="-fx-min-width: 300; -fx-min-height: 70; -fx-font-size: 24px;"/>
     </children>
     <padding>

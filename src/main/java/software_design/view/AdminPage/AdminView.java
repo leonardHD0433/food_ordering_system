@@ -1,16 +1,26 @@
 package software_design.view.AdminPage;
 
 import javafx.scene.control.Button;
+import software_design.command.ModifyMenuCommand;
+import software_design.command.ProcessOrderCommand;
+import software_design.command.GenerateReceiptCommand;
 
 public class AdminView {
-    private final Button modifyMenuButton;
-    private final Button processOrderButton;
-    private final Button generateReceiptButton;
+    private Button modifyMenuButton;
+    private Button processOrderButton;
+    private Button generateReceiptButton;
     
-    public AdminView(Button modifyMenuButton, Button processOrderButton, Button generateReceiptButton) {
+    public AdminView(Button modifyMenuButton, Button processOrderButton, Button generateReceiptButton, 
+                     ModifyMenuCommand modifyMenuCommand, ProcessOrderCommand processOrderCommand, 
+                     GenerateReceiptCommand generateReceiptCommand) 
+    {
         this.modifyMenuButton = modifyMenuButton;
         this.processOrderButton = processOrderButton;
         this.generateReceiptButton = generateReceiptButton;
+
+        modifyMenuButton.setOnAction(e -> modifyMenuCommand.execute());
+        processOrderButton.setOnAction(e -> processOrderCommand.execute());
+        generateReceiptButton.setOnAction(e -> generateReceiptCommand.execute());
     }
     
     public void styleButtons() {

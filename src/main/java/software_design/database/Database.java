@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.io.File;
@@ -71,20 +72,30 @@ public class Database {
 
     public static void importMenuData() throws SQLException, IOException {
         String insertSQL = "INSERT INTO menu_table (ItemCategory, ItemName, ItemDescription, ItemOptions, ItemPrice, ItemAvailability, ItemImage) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        
+        String checkSQL = "SELECT COUNT(*) FROM menu_table";
         String csvFile = "src/main/java/software_design/database/data/menu.csv";
         String line;
         boolean firstLine = true;
     
         try (Connection conn = getConnection();
+             Statement stmt = conn.createStatement();
              PreparedStatement pstmt = conn.prepareStatement(insertSQL);
              BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
-    
-            while ((line = br.readLine()) != null) {
-                if (firstLine) {
-                    firstLine = false;
-                    continue;
+
+                        // Check if table is empty
+                ResultSet rs = stmt.executeQuery(checkSQL);
+                rs.next();
+                int count = rs.getInt(1);
+                if (count > 0) {
+                    System.out.println("Menu table already has data. Skipping import.");
+                    return;
                 }
+    
+                while ((line = br.readLine()) != null) {
+                    if (firstLine) {
+                        firstLine = false;
+                        continue;
+                    }
     
                 String[] data = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
                 
