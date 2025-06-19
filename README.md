@@ -4,7 +4,7 @@
 
 ### Database Setup
 
-This project requires a MySQL database. You can set it up 
+This project requires a MySQL database. You can set it up
 
 1. Using **Docker** (recommended) : So that you don't have to install an entire server on your machine
 2. Install MySQL directly on your system.
@@ -48,6 +48,8 @@ Difference: If mysql is installed directly installed on your system, the databas
 
 ## Running
 
+RECOMMENDED TO RUN ON LINUX (MAKE YOUR LIFE EASIER)
+
 1. Clone this repository:
    ```bash
    git clone https://github.com/leonardHD0433/food_ordering_system.git
@@ -66,6 +68,11 @@ Difference: If mysql is installed directly installed on your system, the databas
    ```bash
    mvn clean install
    ```
+   
+   I wasn't able to run maven on my windows, so  i used the `Run` button given by java extension pack in vscode as shown in screenshot below.
+
+   ![Screenshot](readme/images/image.png)
+
 4. Run the application (Make sure the database `server` or `container` is up & running first):
    ```bash
    mvn clean javafx:run
