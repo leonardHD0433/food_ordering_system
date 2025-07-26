@@ -76,6 +76,7 @@ public class App extends Application {
             }
         } catch (SQLException | IOException e) {
             System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
         }
         launch();
     }

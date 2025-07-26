@@ -3,9 +3,8 @@ module software_design {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
-    requires io.github.cdimascio.dotenv.java;
-    requires jakarta.persistence;
     requires javafx.swing;
+    requires org.xerial.sqlitejdbc;
 
     exports software_design.controller;
     exports software_design.model;

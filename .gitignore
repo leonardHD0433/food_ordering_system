@@ -13,3 +13,6 @@
 # Project exclude paths
 /target/
 
+# Ignore simplified POM
+dependency-reduced-pom.xml
+

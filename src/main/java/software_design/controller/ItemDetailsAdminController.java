@@ -213,7 +213,7 @@ public class ItemDetailsAdminController {
             if (response == ButtonType.OK) {
                 try {
                     // Delete the item from the database
-                    database.removeMenuITem(currentItem.getId());
+                    database.removeMenuItem(currentItem.getId());
                     // Navigate back to the admin menu
                     App.setRoot("AdminMenuPage/menu_admin");
                 } catch (SQLException e) {

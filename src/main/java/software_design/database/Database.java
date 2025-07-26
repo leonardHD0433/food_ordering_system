@@ -1,41 +1,40 @@
 package software_design.database;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.io.File;
-
-import io.github.cdimascio.dotenv.Dotenv;
 
 public class Database {
     private static Database instance; //Add a private static field to the class for storing the singleton instance.
-    private Dotenv dotenv = Dotenv.load();
-    private String DB_HOST;
-    private String DB_PORT;
-    private String DB_NAME;
-    private String DB_USER;
-    private String DB_PASS;
-    private String DB_URL_NO_DB;
-    private String DB_URL;
+    private final String DB_PATH = System.getProperty("user.dir") + 
+                                File.separator + "foodorderingsystem.db";
+    private final String DB_URL = "jdbc:sqlite:" + DB_PATH;
 
     // Make the constructor of the class private. 
     // The static method of the class will still be able to call the constructor, but not the other objects.
     private Database()
     {
-        DB_HOST = dotenv.get("DB_HOST");
-        DB_PORT = dotenv.get("DB_PORT");
-        DB_USER = dotenv.get("DB_USER");
-        DB_PASS = dotenv.get("DB_PASSWORD");
-        DB_NAME = dotenv.get("DB_NAME");
-        DB_URL_NO_DB = "jdbc:mysql://" + DB_HOST + ":" + DB_PORT;
-        DB_URL = DB_URL_NO_DB + "/" + DB_NAME;
+        File dbFile = new File(DB_PATH);
+        File parentDir = dbFile.getParentFile();
+        if (parentDir != null && !parentDir.exists()) {
+            parentDir.mkdirs();
+        }
+
+            // Load SQLite driver explicitly
+        try {
+            Class.forName("org.sqlite.JDBC");
+            System.out.println("SQLite JDBC Driver loaded successfully");
+        } catch (ClassNotFoundException e) {
+            System.err.println("Error loading SQLite JDBC driver: " + e.getMessage());
+        }
     }
 
     // Implement “lazy initialization” inside the static method. 
@@ -51,37 +50,35 @@ public class Database {
     public void createDatabase() throws SQLException 
     {
         // Create the database if it does not exist
-        try (Connection conn = DriverManager.getConnection(DB_URL_NO_DB, DB_USER, DB_PASS);
-             Statement stmt = conn.createStatement()) {
-            stmt.executeUpdate("CREATE DATABASE IF NOT EXISTS " + DB_NAME);
-        } 
-        catch (SQLException e) 
-        {
-            System.out.println("Error creating database: " + e.getMessage());
+        try (Connection conn = getConnection()) {
+            System.out.println("SQLite database created or connected successfully");
+        }
+        catch (SQLException e) {
+            System.out.println("Error creating or connecting to SQLite database: " + e.getMessage());
+            throw e; // Rethrow the exception to handle it in the calling method
         }
     }
 
-    public Connection getConnection() throws SQLException 
-    {
-        return DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+    public Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(DB_URL);
     }
 
     public void createTables() throws SQLException 
     {
         String createMenuTableSQL = "CREATE TABLE IF NOT EXISTS menu_table (" +
-                "ItemId INT AUTO_INCREMENT PRIMARY KEY, " +
-                "ItemCategory VARCHAR(20) NOT NULL, " +
-                "ItemName VARCHAR(50) NOT NULL, " +
-                "ItemDescription VARCHAR(150) NOT NULL, " +
-                "ItemOptions VARCHAR(100), " +
-                "ItemPrice DOUBLE NOT NULL, " +
-                "ItemAvailability BOOLEAN NOT NULL," +
-                "ItemImage MEDIUMBLOB NOT NULL" +
+                "ItemId INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "ItemCategory TEXT NOT NULL, " +
+                "ItemName TEXT NOT NULL, " +
+                "ItemDescription TEXT NOT NULL, " +
+                "ItemOptions TEXT, " +
+                "ItemPrice REAL NOT NULL, " +
+                "ItemAvailability INTEGER NOT NULL," + 
+                "ItemImage BLOB NOT NULL" +
                 ")";
 
         String createTableStatusSQL = "CREATE TABLE IF NOT EXISTS table_status (" +
-                "TableId INT PRIMARY KEY" +
-                ")";
+                                      "TableId INTEGER PRIMARY KEY" +
+                                      ")";
 
         try (Connection conn = getConnection();
             Statement stmt = conn.createStatement()) {
@@ -134,9 +131,15 @@ public class Database {
                 File imageFile = new File(imagePath);
                 if (imageFile.exists()) 
                 {
-                    try (FileInputStream fis = new FileInputStream(imageFile)) 
-                    {
-                        pstmt.setBinaryStream(7, fis, imageFile.length());
+                    try {
+                        // Read the entire file as a byte array
+                        byte[] imageData = Files.readAllBytes(imageFile.toPath());
+                        // Set the bytes directly instead of using setBinaryStream
+                        pstmt.setBytes(7, imageData);
+                        pstmt.executeUpdate();
+                    } catch (IOException e) {
+                        System.out.println("Error reading image file: " + e.getMessage());
+                        pstmt.setBytes(7, new byte[0]);
                         pstmt.executeUpdate();
                     }
                 } 
@@ -183,7 +186,7 @@ public class Database {
         }
     }
 
-    public void removeMenuITem(int id) throws SQLException {
+    public void removeMenuItem(int id) throws SQLException {
         String deleteSQL = "DELETE FROM menu_table WHERE ItemId = ?";
     
         try (Connection conn = getConnection();
