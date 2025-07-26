@@ -16,3 +16,5 @@
 # Ignore simplified POM
 dependency-reduced-pom.xml
 
+# Ignore database files
+*.db
