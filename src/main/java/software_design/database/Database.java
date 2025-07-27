@@ -109,34 +109,57 @@ public class Database {
         }
     }
 
-    // For the first .db file creation (Import data from CSV file is only done in the development phase)
-    public void importMenuData() throws SQLException, IOException {
-        String insertSQL = "INSERT INTO menu_table (ItemCategory, ItemName, ItemDescription, ItemOptions, ItemPrice, ItemAvailability, ItemImage) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    public void importMenuData() throws SQLException {
+        // First check if the table already has data
         String checkSQL = "SELECT COUNT(*) FROM menu_table";
-        String csvFile = "src/main/java/software_design/database/data/menu.csv";
+        
+        try (Connection conn = getConnection();
+            Statement stmt = conn.createStatement()) {
+            
+            // Check if table is empty
+            ResultSet rs = stmt.executeQuery(checkSQL);
+            rs.next();
+            int count = rs.getInt(1);
+            
+            if (count > 0) {
+                System.out.println("Menu table already has data. Skipping import...");
+                return; // Exit early if data exists
+            }
+            
+            // Only try to import CSV if table is empty and we're likely in development mode
+            System.out.println("Table is empty. Attempting to import data from CSV...");
+            String csvFile = "src/main/java/software_design/database/data/menu.csv";
+            File csvFileObj = new File(csvFile);
+            
+            if (!csvFileObj.exists()) {
+                System.out.println("CSV file not found: " + csvFile);
+                System.out.println("This is normal for end-user deployment. Menu data should be added manually.");
+                return; // Exit if CSV doesn't exist
+            }
+            
+            // Continue with CSV import
+            importMenuDataFromCSV(conn, csvFile);
+        } catch (SQLException e) {
+            System.out.println("Error checking menu table data: " + e.getMessage());
+            throw e;
+        }
+    }
+
+    // Extracted method to handle the actual CSV import
+    private void importMenuDataFromCSV(Connection conn, String csvFile) {
+        String insertSQL = "INSERT INTO menu_table (ItemCategory, ItemName, ItemDescription, ItemOptions, ItemPrice, ItemAvailability, ItemImage) VALUES (?, ?, ?, ?, ?, ?, ?)";
         String line;
         boolean firstLine = true;
-    
-        try (Connection conn = getConnection();
-             Statement stmt = conn.createStatement();
-             PreparedStatement pstmt = conn.prepareStatement(insertSQL);
-             BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
 
-                        // Check if table is empty
-                ResultSet rs = stmt.executeQuery(checkSQL);
-                rs.next();
-                int count = rs.getInt(1);
-                if (count > 0) {
-                    System.out.println("Menu table already has data. Skipping import...");
-                    return;
+        try (PreparedStatement pstmt = conn.prepareStatement(insertSQL);
+            BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+
+            while ((line = br.readLine()) != null) {
+                if (firstLine) {
+                    firstLine = false;
+                    continue;
                 }
-    
-                while ((line = br.readLine()) != null) {
-                    if (firstLine) {
-                        firstLine = false;
-                        continue;
-                    }
-    
+
                 String[] data = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
                 
                 pstmt.setString(1, data[0].trim());
@@ -145,12 +168,11 @@ public class Database {
                 pstmt.setString(4, data[3].trim());
                 pstmt.setDouble(5, Double.parseDouble(data[4].trim()));
                 pstmt.setBoolean(6, "Available".equals(data[5].trim()));
-    
+
                 // Improved image loading with proper resource management
                 String imagePath = "src/main/java/software_design/database/data/item_img/" + data[6].trim();
                 File imageFile = new File(imagePath);
-                if (imageFile.exists()) 
-                {
+                if (imageFile.exists()) {
                     try {
                         // Read the entire file as a byte array
                         byte[] imageData = Files.readAllBytes(imageFile.toPath());
@@ -162,14 +184,17 @@ public class Database {
                         pstmt.setBytes(7, new byte[0]);
                         pstmt.executeUpdate();
                     }
-                } 
-                else 
-                {
+                } else {
                     System.out.println("Image not found: " + imagePath);
                     pstmt.setBytes(7, new byte[0]);
                     pstmt.executeUpdate();
                 }
             }
+            System.out.println("Menu data imported successfully from CSV.");
+        } catch (IOException e) {
+            System.out.println("Error reading CSV file: " + e.getMessage());
+        } catch (SQLException e) {
+            System.out.println("Error inserting menu data: " + e.getMessage());
         }
     }
 

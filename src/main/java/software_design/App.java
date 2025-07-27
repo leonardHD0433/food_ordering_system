@@ -88,7 +88,7 @@ public class App extends Application {
             }
 
             database.importMenuData();
-        } catch (SQLException | IOException e) {
+        } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
             e.printStackTrace();
         }
