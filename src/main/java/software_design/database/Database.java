@@ -96,7 +96,8 @@ public class Database {
                 "ItemDescription TEXT NOT NULL, " +
                 "ItemOptions TEXT, " +
                 "ItemPrice REAL NOT NULL, " +
-                "ItemAvailability INTEGER NOT NULL," + 
+                // ItemAvailability: 0 = unavailable, 1 = available
+                "ItemAvailability INTEGER NOT NULL CHECK (ItemAvailability IN (0, 1))," + 
                 "ItemImage BLOB NOT NULL" +
                 ")";
 
