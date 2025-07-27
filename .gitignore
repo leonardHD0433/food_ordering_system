@@ -19,5 +19,6 @@ dependency-reduced-pom.xml
 # Ignore database files
 *.db
 
-# Ignore distribution directory
+# Ignore distribution & config directory
 dist/
+config/
