@@ -147,7 +147,7 @@ public class Database {
     }
 
     // Extracted method to handle the actual CSV import
-    private void importMenuDataFromCSV(Connection conn, String csvFile) {
+    private void importMenuDataFromCSV(Connection conn, String csvFile) throws IOException, SQLException {
         String insertSQL = "INSERT INTO menu_table (ItemCategory, ItemName, ItemDescription, ItemOptions, ItemPrice, ItemAvailability, ItemImage) VALUES (?, ?, ?, ?, ?, ?, ?)";
         String line;
         boolean firstLine = true;
