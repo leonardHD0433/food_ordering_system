@@ -7,6 +7,8 @@
 
 ## Running
 
+### Development Setup
+
 CURRENTLY ONLY TESTED ON WINDOWS
 
 1. Clone this repository:
@@ -36,6 +38,10 @@ CURRENTLY ONLY TESTED ON WINDOWS
    ```bash
    mvn clean javafx:run
    ```
+
+### Installation from Release
+
+#### Windows
 
 ---
 
