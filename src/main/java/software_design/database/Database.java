@@ -47,11 +47,24 @@ public class Database {
         return instance;
     }
 
+    // Method to get a connection to the database.
+    public Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(DB_URL);
+    }
+
+    // Method to check if the database file exists.
+    public boolean databaseExists() throws SQLException {
+        File dbFile = new File(DB_PATH);
+        // Check if the database file exists
+        return dbFile.exists();
+    }
+
+    // Method to create the database file if it does not exist.
     public void createDatabase() throws SQLException 
     {
         // Create the database if it does not exist
         try (Connection conn = getConnection()) {
-            System.out.println("SQLite database created or connected successfully");
+            System.out.println("SQLite database created successfully");
         }
         catch (SQLException e) {
             System.out.println("Error creating or connecting to SQLite database: " + e.getMessage());
@@ -59,8 +72,19 @@ public class Database {
         }
     }
 
-    public Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(DB_URL);
+    // Method to check if a specific table exists in the database.
+    public boolean tableExists(String tableName) throws SQLException {
+        String query = "SELECT name FROM sqlite_master WHERE type='table' AND name=?";
+        
+        try (Connection conn = getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(query)) {
+            
+            pstmt.setString(1, tableName);
+            
+            try (ResultSet rs = pstmt.executeQuery()) {
+                return rs.next(); // Returns true if the ResultSet has at least one row
+            }
+        }
     }
 
     public void createTables() throws SQLException 
@@ -76,20 +100,16 @@ public class Database {
                 "ItemImage BLOB NOT NULL" +
                 ")";
 
-        String createTableStatusSQL = "CREATE TABLE IF NOT EXISTS table_status (" +
-                                      "TableId INTEGER PRIMARY KEY" +
-                                      ")";
-
         try (Connection conn = getConnection();
             Statement stmt = conn.createStatement()) {
             stmt.executeUpdate(createMenuTableSQL);
-            stmt.executeUpdate(createTableStatusSQL);
-            System.out.println("Tables created successfully.");
+            System.out.println("Menu table created successfully.");
         } catch (SQLException e) {
             System.out.println("Error creating tables: " + e.getMessage());
         }
     }
 
+    // For the first .db file creation (Import data from CSV file is only done in the development phase)
     public void importMenuData() throws SQLException, IOException {
         String insertSQL = "INSERT INTO menu_table (ItemCategory, ItemName, ItemDescription, ItemOptions, ItemPrice, ItemAvailability, ItemImage) VALUES (?, ?, ?, ?, ?, ?, ?)";
         String checkSQL = "SELECT COUNT(*) FROM menu_table";
@@ -107,7 +127,7 @@ public class Database {
                 rs.next();
                 int count = rs.getInt(1);
                 if (count > 0) {
-                    System.out.println("Menu table already has data. Skipping import.");
+                    System.out.println("Menu table already has data. Skipping import...");
                     return;
                 }
     
