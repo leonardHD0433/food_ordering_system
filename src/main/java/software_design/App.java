@@ -59,23 +59,38 @@ public class App extends Application {
     public static void main(String[] args) {
         try {
             Database database = Database.getInstance();
-            database.createDatabase();
-            System.out.println("Database creation checked.");
-            database.createTables();
-            System.out.println("Tables creation checked.");
-            database.importMenuData();
-            System.out.println("Menu data import checked.");
+            // Initialize the database
+            System.out.println("Checking if database exist...");
+            if (database.databaseExists()) {
+                System.out.println("Database already exists. Skipping creation...");
+            }
+            else {
+                System.out.println("Database does not exist. Creating database...");
+                database.createDatabase();
+            }
 
             // Test getting a connection to the database
             Connection connection = database.getConnection();
             if (connection != null) {
-                System.out.println("Connection successful!");
+                System.out.println("Database Connection Successful!");
                 connection.close();
             } else {
                 System.out.println("Failed to make connection!");
             }
-        } catch (SQLException | IOException e) {
+
+            // Check if tables exist and create them if not
+            if (database.tableExists("menu_table")) {
+                System.out.println("Tables already exists. Skipping creation...");
+            }
+            else {
+                System.out.println("Tables does not exist. Creating tables...");
+                database.createTables();
+            }
+
+            database.importMenuData();
+        } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
         }
         launch();
     }

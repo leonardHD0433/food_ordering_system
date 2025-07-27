@@ -13,3 +13,12 @@
 # Project exclude paths
 /target/
 
+# Ignore simplified POM
+dependency-reduced-pom.xml
+
+# Ignore database files
+*.db
+
+# Ignore distribution & config directory
+dist/
+config/
