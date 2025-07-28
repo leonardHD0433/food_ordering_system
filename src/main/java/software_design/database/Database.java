@@ -110,7 +110,7 @@ public class Database {
         }
     }
 
-    public void importMenuData() throws SQLException {
+    public void importMenuData() throws IOException, SQLException {
         // First check if the table already has data
         String checkSQL = "SELECT COUNT(*) FROM menu_table";
         
