@@ -57,7 +57,7 @@ public class MenuRepository {
         try (Connection conn = database.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             
-            stmt.setString(1, item.getCategory());
+            stmt.setString(1, UpperFirstLetter(item.getCategory()));
             stmt.setString(2, item.getName());
             stmt.setString(3, item.getDescription());
             stmt.setString(4, item.getOptions());
@@ -85,5 +85,14 @@ public class MenuRepository {
         );
     
         return distinct_categories;
+    }
+    public static String UpperFirstLetter(String str) 
+    {
+        if (str == null || str.isEmpty()) 
+        {
+            return str; 
+        }
+        // This will uppercase the first letter.
+        return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
     }
 }
