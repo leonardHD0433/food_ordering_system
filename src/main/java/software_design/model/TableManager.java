@@ -3,7 +3,7 @@ package software_design.model;
 public class TableManager {
     private static TableManager instance;
     private final Table[] tables;
-    private static final int MAX_TABLES = 20;
+    private static final int MAX_TABLES = 15;
     private Table currentTable;
 
     private TableManager() {
