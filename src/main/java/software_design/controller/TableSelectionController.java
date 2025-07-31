@@ -5,6 +5,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import software_design.App;
+import software_design.model.Cart;
+import software_design.model.Order;
+import software_design.model.Table;
 import software_design.model.TableManager;
 import software_design.view.TableSelectionPage.TableSelectionView;
 
@@ -27,7 +30,18 @@ public class TableSelectionController {
 
     private void handleTableSelection(int tableId) {
         try {
-            tableManager.getTable(tableId);
+            Table table = tableManager.getTable(tableId);
+            
+            // Create an empty order if one doesn't exist to mark table as "in use"
+            if (table.getOrder() == null) {
+                // Create a new empty order to mark the table as "in use"
+                Order newOrder = new Order(String.valueOf(tableId), tableId, new Cart());
+                table.setOrder(newOrder);
+            }
+            
+            // Set this as the current table and proceed to menu
+            tableManager.setTable(tableId, table); 
+            tableManager.setCurrentTable(tableId);           
             App.setRoot("MenuPage/menu");
         } catch (Exception e) {
             view.showErrorWithFade("Error selecting table: " + e.getMessage());

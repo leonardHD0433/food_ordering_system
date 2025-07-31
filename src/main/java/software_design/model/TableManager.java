@@ -21,12 +21,17 @@ public class TableManager {
         return instance;
     }
 
+    public void setTable(int tableNumber, Table table) {
+        tables[tableNumber - 1] = table;
+    }
+
     public Table getTable(int tableNumber) {
-        if (tableNumber < 1 || tableNumber > MAX_TABLES) {
-            throw new IllegalArgumentException("Invalid table number");
-        }
         currentTable = tables[tableNumber - 1];
         return currentTable;
+    }
+
+    public void setCurrentTable(int tableNumber) {
+        this.currentTable = getTable(tableNumber);
     }
 
     public Table getCurrentTable() {
@@ -38,9 +43,6 @@ public class TableManager {
     }
 
     public void clearTable(int tableNumber) {
-        if (tableNumber < 1 || tableNumber > MAX_TABLES) {
-            throw new IllegalArgumentException("Invalid table number");
-        }
         tables[tableNumber - 1].clearCart();
         tables[tableNumber - 1].setOrder(null);
     }
