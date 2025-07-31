@@ -126,8 +126,8 @@ public class TableSelectionView {
         tableRect.setStroke(Color.DARKGRAY);
         tableRect.setStrokeWidth(2);
         
-        double tableFontSize = Math.max(10, cellWidth * 0.18);
-        double statusFontSize = Math.max(8, cellWidth * 0.12);
+        double tableFontSize = Math.max(10, cellWidth * 0.16);
+        double statusFontSize = Math.max(8, cellWidth * 0.10);
         
         Label tableNumberLabel = new Label("Table " + tableId);
         tableNumberLabel.setStyle("-fx-font-weight: bold; -fx-font-size: " + tableFontSize + "px;");
