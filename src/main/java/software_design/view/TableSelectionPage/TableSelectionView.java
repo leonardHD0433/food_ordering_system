@@ -20,6 +20,10 @@ public class TableSelectionView {
     private final Label alert;
     private GridPane tableMapGrid;
     private Consumer<Integer> onTableSelected;
+    
+    // Add class-level fields to track available space
+    private double cellWidth;
+    private double cellHeight;
 
     public TableSelectionView(Label alert, GridPane tableMapGrid) {
         this.alert = alert;
@@ -38,6 +42,20 @@ public class TableSelectionView {
         int cols = 5;
         int rows = 4;
         
+        // Calculate cell size based on available space
+        calculateCellSize(cols, rows);
+        
+        // Listen for grid size changes and recalculate
+        tableMapGrid.widthProperty().addListener((obs, oldVal, newVal) -> {
+            calculateCellSize(cols, rows);
+            updateTableSizes();
+        });
+        
+        tableMapGrid.heightProperty().addListener((obs, oldVal, newVal) -> {
+            calculateCellSize(cols, rows);
+            updateTableSizes();
+        });
+        
         for (int i = 0; i < tables.length; i++) {
             Table table = tables[i];
             int tableId = table.getTableId();
@@ -45,7 +63,6 @@ public class TableSelectionView {
             // Create a visual table representation
             StackPane tablePane = createTableVisual(tableId, table);
             
-            // Add to grid - calculate row and column
             int col = i % cols;
             int row = i / cols;
             
@@ -53,41 +70,83 @@ public class TableSelectionView {
         }
     }
 
+    private void calculateCellSize(int cols, int rows) {
+        // Account for gaps between cells
+        double gapSpace = (cols - 1) * tableMapGrid.getHgap() + (rows - 1) * tableMapGrid.getVgap();
+        double paddingSpace = 40; // Account for padding
+        
+        // Calculate available width and height for each cell
+        cellWidth = (tableMapGrid.getWidth() - gapSpace - paddingSpace) / cols;
+        cellHeight = (tableMapGrid.getHeight() - gapSpace - paddingSpace) / rows;
+        
+        // Ensure minimum size
+        cellWidth = Math.max(cellWidth, 50);
+        cellHeight = Math.max(cellHeight, 50);
+    }
+    
+    private void updateTableSizes() {
+        for (javafx.scene.Node node : tableMapGrid.getChildren()) {
+            if (node instanceof StackPane) {
+                StackPane tablePane = (StackPane) node;
+                for (javafx.scene.Node child : tablePane.getChildren()) {
+                    if (child instanceof Rectangle) {
+                        Rectangle rect = (Rectangle) child;
+                        // Resize rectangle
+                        rect.setWidth(cellWidth * 0.8);
+                        rect.setHeight(cellHeight * 0.8);
+                    } else if (child instanceof VBox) {
+                        VBox tableInfo = (VBox) child;
+                        // Update text sizes
+                        for (javafx.scene.Node textNode : tableInfo.getChildren()) {
+                            if (textNode instanceof Label) {
+                                Label label = (Label) textNode;
+                                if (label.getText().startsWith("Table")) {
+                                    double fontSize = Math.max(10, cellWidth * 0.18);
+                                    label.setStyle("-fx-font-weight: bold; -fx-font-size: " + fontSize + "px;");
+                                } else {
+                                    double fontSize = Math.max(8, cellWidth * 0.12);
+                                    label.setStyle("-fx-font-size: " + fontSize + "px;");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     private StackPane createTableVisual(int tableId, Table table) {
-        // Create table visual
-        Rectangle tableRect = new Rectangle(80, 80);
+        // Create table visual with dynamic size
+        Rectangle tableRect = new Rectangle(cellWidth * 0.8, cellHeight * 0.8);
         tableRect.setArcWidth(15);
         tableRect.setArcHeight(15);
         
-        // Style based on table status (e.g., if order exists)
         boolean hasOrder = table.getOrder() != null;
         tableRect.setFill(hasOrder ? Color.LIGHTGREEN : Color.LIGHTGRAY);
         tableRect.setStroke(Color.DARKGRAY);
         tableRect.setStrokeWidth(2);
         
-        // Add table number
-        Label tableNumberLabel = new Label("Table " + tableId);
-        tableNumberLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 14px;");
+        double tableFontSize = Math.max(10, cellWidth * 0.18);
+        double statusFontSize = Math.max(8, cellWidth * 0.12);
         
-        // Status indicator if needed
+        Label tableNumberLabel = new Label("Table " + tableId);
+        tableNumberLabel.setStyle("-fx-font-weight: bold; -fx-font-size: " + tableFontSize + "px;");
+        
         Label statusLabel = new Label(hasOrder ? "In Use" : "Available");
-        statusLabel.setStyle("-fx-font-size: 10px;");
+        statusLabel.setStyle("-fx-font-size: " + statusFontSize + "px;");
         
         VBox tableInfo = new VBox(5, tableNumberLabel, statusLabel);
         tableInfo.setAlignment(Pos.CENTER);
         
-        // Combine into a stack pane
         StackPane tablePane = new StackPane(tableRect, tableInfo);
         tablePane.setStyle("-fx-padding: 10;");
         
-        // Add click handler
         tablePane.setOnMouseClicked(e -> {
             if (onTableSelected != null) {
                 onTableSelected.accept(tableId);
             }
         });
         
-        // Add hover effect
         tablePane.setOnMouseEntered(e -> {
             tableRect.setStroke(Color.BLUE);
             tableRect.setStrokeWidth(3);

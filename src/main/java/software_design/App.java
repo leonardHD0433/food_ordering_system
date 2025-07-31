@@ -28,6 +28,12 @@ public class App extends Application {
         scene = new Scene(loadFXML("TableSelectionPage/table_selection"), 640, 480);
         stage.setScene(scene);
         stage.setTitle("Restaurant Ordering System");
+        // Set minimum window size to prevent tables from becoming too small
+        stage.setMinWidth(1000);
+        stage.setMinHeight(800);
+        
+        // Make the stage resizable
+        stage.setResizable(true);
         stage.show();
     }
 
