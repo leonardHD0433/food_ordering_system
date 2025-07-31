@@ -86,6 +86,7 @@ public class MenuRepository {
     
         return distinct_categories;
     }
+    
     public static String UpperFirstLetter(String str) 
     {
         if (str == null || str.isEmpty()) 
